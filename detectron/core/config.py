@@ -71,6 +71,8 @@ cfg = __C
 # ---------------------------------------------------------------------------- #
 __C.TRAIN = AttrDict()
 
+__C.TRAIN.DOMAIN_ADAPTATION = False
+
 # Initialize network with weights from this .pkl file
 __C.TRAIN.WEIGHTS = b''
 

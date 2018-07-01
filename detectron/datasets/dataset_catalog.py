@@ -201,6 +201,30 @@ _DATASETS = {
             _DATA_DIR + '/VOC2012/annotations/voc_2012_val.json',
         _DEVKIT_DIR:
             _DATA_DIR + '/VOC2012/VOCdevkit2012'
+    },
+    'visda_synthetic_train': {
+        _IM_DIR:
+            _DATA_DIR + '/visda/synthetic_train',
+        _ANN_FN:
+            _DATA_DIR + '/visda/annotations/visda_instance_synthetic_train.json',
+    },
+    'visda_synthetic_val': {
+        _IM_DIR:
+            _DATA_DIR + '/visda/synthetic_val',
+        _ANN_FN:
+            _DATA_DIR + '/visda/annotations/visda_instance_synthetic_val.json',
+    },
+    'visda_coco2017_train': {
+        _IM_DIR:
+            _DATA_DIR + '/visda/coco_train2017',
+        _ANN_FN:
+            _DATA_DIR + '/visda/annotations/visda_instance_coco_train2017.json',
+    },
+    'visda_coco2017_val': {
+        _IM_DIR:
+            _DATA_DIR + '/visda/coco_val2017',
+        _ANN_FN:
+            _DATA_DIR + '/visda/annotations/visda_instance_coco_val2017.json',
     }
 }
 

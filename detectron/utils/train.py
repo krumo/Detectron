@@ -50,6 +50,8 @@ import detectron.utils.net as nu
 def train_model():
     """Model training loop."""
     logger = logging.getLogger(__name__)
+    if cfg.TRAIN.DOMAIN_ADAPTATION:
+        domain_adaptive_train()
     model, weights_file, start_iter, checkpoints, output_dir = create_model()
     if 'final' in checkpoints:
         # The final model was found in the output directory, so nothing to do
@@ -191,3 +193,7 @@ def dump_proto_files(model, output_dir):
         fid.write(str(model.net.Proto()))
     with open(os.path.join(output_dir, 'param_init_net.pbtxt'), 'w') as fid:
         fid.write(str(model.param_init_net.Proto()))
+
+def domain_adaptive_train():
+    logger = logging.getLogger(__name__)
+    logger.info('Begining domain adaptive training')
