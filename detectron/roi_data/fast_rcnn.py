@@ -102,6 +102,10 @@ def get_fast_rcnn_blob_names(is_training=True):
                 for lvl in range(k_min, k_max + 1):
                     blob_names += ['keypoint_rois_fpn' + str(lvl)]
                 blob_names += ['keypoint_rois_idx_restore_int32']
+    # if is_training and cfg.TRAIN.DOMAIN_ADAPTATION:
+    #     blob_names += ['is_source']
+    #     blob_names += ['dc_label']
+    #     blob_names += ['da_label']
     return blob_names
 
 
@@ -190,6 +194,16 @@ def _sample_rois(roidb, im_scale, batch_idx):
         bbox_inside_weights=bbox_inside_weights,
         bbox_outside_weights=bbox_outside_weights
     )
+    # if cfg.TRAIN.DOMAIN_ADAPTATION and 'is_source' in roidb.keys():
+    #     print(roidb.keys())
+    #     if roidb['is_source']:
+    #         blob_dict['is_source']=np.full((1,),True,dtype=bool)
+    #         blob_dict['dc_label']= np.zeros((1,2,36,67), dtype=np.float32)
+    #         blob_dict['da_label']= np.zeros((256,), dtype=np.float32)
+    #     else:
+    #         blob_dict['is_source']=np.full((1,),False,dtype=bool)
+    #         blob_dict['dc_label']= np.ones((1,2,36,67), dtype=np.float32)
+    #         blob_dict['da_label']= np.ones((256,), dtype=np.float32)
 
     # Optionally add Mask R-CNN blobs
     if cfg.MODEL.MASK_ON:

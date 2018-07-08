@@ -85,7 +85,8 @@ class JsonDataset(object):
         proposal_file=None,
         min_proposal_size=2,
         proposal_limit=-1,
-        crowd_filter_thresh=0
+        crowd_filter_thresh=0,
+        is_source=True
     ):
         """Return an roidb corresponding to the json dataset. Optionally:
            - include ground truth boxes in the roidb
@@ -121,7 +122,10 @@ class JsonDataset(object):
                 '_add_proposals_from_file took {:.3f}s'.
                 format(self.debug_timer.toc(average=False))
             )
+        # if is_source:
         _add_class_assignments(roidb)
+        _add_domain_assignments(roidb, is_source)
+        # print(roidb)
         return roidb
 
     def _prep_roidb_entry(self, entry):
@@ -145,6 +149,7 @@ class JsonDataset(object):
             np.empty((0, self.num_classes), dtype=np.float32)
         )
         entry['is_crowd'] = np.empty((0), dtype=np.bool)
+        entry['is_source'] = np.empty((0), dtype=np.bool)
         # 'box_to_gt_ind_map': Shape is (#rois). Maps from each roi to the index
         # in the list of rois that satisfy np.where(entry['gt_classes'] > 0)
         entry['box_to_gt_ind_map'] = np.empty((0), dtype=np.int32)
@@ -452,3 +457,10 @@ def _sort_proposals(proposals, id_field):
     fields_to_sort = ['boxes', id_field, 'scores']
     for k in fields_to_sort:
         proposals[k] = [proposals[k][i] for i in order]
+
+def _add_domain_assignments(roidb, is_source):
+    """Compute object category assignment for each box associated with each
+    roidb entry.
+    """
+    for entry in roidb:
+        entry['is_source'] = np.append(entry['is_source'], is_source)

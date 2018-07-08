@@ -55,6 +55,7 @@ import detectron.modeling.rfcn_heads as rfcn_heads
 import detectron.modeling.rpn_heads as rpn_heads
 import detectron.roi_data.minibatch as roi_data_minibatch
 import detectron.utils.c2 as c2_utils
+import detectron.utils.blob as blob_utils
 
 logger = logging.getLogger(__name__)
 
@@ -175,12 +176,19 @@ def build_generic_detection_model(
             # Create a net that can be used to execute the conv body on an image
             # (without also executing RPN or any other network heads)
             model.conv_body_net = model.net.Clone('conv_body_net')
+        
+        blob_feature_map = blob_conv
+        dim_feature_map = dim_conv
+        spatial_scale_feature_map = spatial_scale_conv
 
         head_loss_gradients = {
             'rpn': None,
             'box': None,
             'mask': None,
             'keypoints': None,
+            'image': None,
+            'instance': None,
+            'consistency': None,
         }
 
         if cfg.RPN.RPN_ON:
@@ -198,10 +206,12 @@ def build_generic_detection_model(
 
         if not cfg.MODEL.RPN_ONLY:
             # Add the Fast R-CNN head
-            head_loss_gradients['box'] = _add_fast_rcnn_head(
+            head_loss_gradients['box'], blob_feats_rois_all, dim_feats_rois_all = _add_fast_rcnn_head(
                 model, add_roi_box_head_func, blob_conv, dim_conv,
                 spatial_scale_conv
             )
+            # rois = workspace.FetchBlob(blob_feats_rois_all)
+            # print(type(rois))
 
         if cfg.MODEL.MASK_ON:
             # Add the mask head
@@ -216,6 +226,12 @@ def build_generic_detection_model(
                 model, add_roi_keypoint_head_func, blob_conv, dim_conv,
                 spatial_scale_conv
             )
+        if cfg.TRAIN.DOMAIN_ADAPTATION:
+            # Add Image-level loss
+            head_loss_gradients['image'], _ = _add_image_level_classifier(model, blob_feature_map, dim_feature_map, spatial_scale_feature_map)
+            # Add Instance-level loss
+            head_loss_gradients['instance'], _ = _add_instance_level_classifier(model, blob_feats_rois_all, dim_feats_rois_all)
+            # Add consistency regularization
 
         if model.train:
             loss_gradients = {}
@@ -229,6 +245,45 @@ def build_generic_detection_model(
     optim.build_data_parallel_model(model, _single_gpu_build_func)
     return model
 
+def _add_image_level_classifier(model, blob_in, dim_in, spatial_scale_in):
+    da_grl = model.NegateGradient(blob_in, 'da_grl')
+    da_conv_1 = model.Conv(da_grl, 'da_conv_1', dim_in, 512, 1, pad=1, stride=1)
+    da_conv_1 = model.Relu(da_conv_1, 'da_conv_1')
+    da_conv_2 = model.Conv(da_conv_1, 'da_conv_2', 512, 2, 1, pad=1, stride=1)
+    da_loss = None
+    # if model.train:
+    #     da_prob, da_loss = model.net.SpatialSoftmaxWithLoss(
+    #         ['da_conv_2', 'da_label'], ['da_prob', 'da_loss'],
+    #         scale=model.GetLossScale()
+    #     )
+    #     da_loss = blob_utils.get_loss_gradients(model, [da_loss])
+    #     model.AddLosses(['da_loss'])
+    return da_loss, da_conv_2
+
+def _add_instance_level_classifier(model, blob_in, dim_in):
+    from detectron.utils.c2 import const_fill
+    from detectron.utils.c2 import gauss_fill
+    dc_grl = model.NegateGradient(blob_in, 'dc_grl')
+    dc_ip1 = model.FC(dc_grl, 'dc_ip1', dim_in, 1024, weight_init=gauss_fill(0.01), bias_init=const_fill(0.0))
+    da_relu_1 = model.Relu(dc_ip1, 'dc_relu_1')
+    da_drop_1 = model.Dropout(da_relu_1, 'da_drop_1', ratio=0.5, is_test=0)
+
+    dc_ip2 = model.FC(da_drop_1, 'dc_ip2', 1024, 1024, weight_init=gauss_fill(0.01), bias_init=const_fill(0.0))
+    da_relu_2 = model.Relu(dc_ip2, 'dc_relu_2')
+    da_drop_2 = model.Dropout(da_relu_2, 'da_drop_2', ratio=0.5, is_test=0)
+    
+    dc_ip3 = model.FC(da_drop_2, 'dc_ip3', 1024, 1, weight_init=gauss_fill(0.05), bias_init=const_fill(0.0))
+
+    dc_loss = None
+    # if model.train:
+    #     dc_loss = model.net.SigmoidCrossEntropyLoss(
+    #         [dc_ip3, 'dc_label'],
+    #         'loss_dc',
+    #         scale=model.GetLossScale()
+    #     )
+    #     dc_loss = blob_utils.get_loss_gradients(model, [dc_loss])
+    #     model.AddLosses('loss_dc')
+    return dc_loss, dc_ip3
 
 def _narrow_to_fpn_roi_levels(blobs, spatial_scales):
     """Return only the blobs and spatial scales that will be used for RoI heads.
@@ -258,7 +313,7 @@ def _add_fast_rcnn_head(
         loss_gradients = fast_rcnn_heads.add_fast_rcnn_losses(model)
     else:
         loss_gradients = None
-    return loss_gradients
+    return loss_gradients, blob_frcn, dim_frcn
 
 
 def _add_roi_mask_head(

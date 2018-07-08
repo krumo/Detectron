@@ -225,7 +225,32 @@ _DATASETS = {
             _DATA_DIR + '/visda/coco_val2017',
         _ANN_FN:
             _DATA_DIR + '/visda/annotations/visda_instance_coco_val2017.json',
-    }
+    },
+    'foggy_cityscapes_fine_instanceonly_seg_train': {
+        _IM_DIR:
+            _DATA_DIR + '/foggy_cityscapes/images',
+        _ANN_FN:
+            _DATA_DIR + '/foggy_cityscapes/annotations/instancesonly_filtered_train.json',
+        _RAW_DIR:
+            _DATA_DIR + '/foggy_cityscapes/raw'
+    },
+    'foggy_cityscapes_fine_instanceonly_seg_val': {
+        _IM_DIR:
+            _DATA_DIR + '/foggy_cityscapes/images',
+        # use filtered validation as there is an issue converting contours
+        _ANN_FN:
+            _DATA_DIR + '/foggy_cityscapes/annotations/instancesonly_filtered_val.json',
+        _RAW_DIR:
+            _DATA_DIR + '/foggy_cityscapes/raw'
+    },
+    'foggy_cityscapes_fine_instanceonly_seg_test': {
+        _IM_DIR:
+            _DATA_DIR + '/foggy_cityscapes/images',
+        _ANN_FN:
+            _DATA_DIR + '/foggy_cityscapes/annotations/instancesonly_filtered_test.json',
+        _RAW_DIR:
+            _DATA_DIR + '/foggy_cityscapes/raw'
+    },
 }
 
 

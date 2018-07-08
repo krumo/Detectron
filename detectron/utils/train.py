@@ -50,8 +50,6 @@ import detectron.utils.net as nu
 def train_model():
     """Model training loop."""
     logger = logging.getLogger(__name__)
-    if cfg.TRAIN.DOMAIN_ADAPTATION:
-        domain_adaptive_train()
     model, weights_file, start_iter, checkpoints, output_dir = create_model()
     if 'final' in checkpoints:
         # The final model was found in the output directory, so nothing to do
@@ -156,7 +154,10 @@ def optimize_memory(model):
 def setup_model_for_training(model, weights_file, output_dir):
     """Loaded saved weights and create the network in the C2 workspace."""
     logger = logging.getLogger(__name__)
-    add_model_training_inputs(model)
+    if cfg.TRAIN.DOMAIN_ADAPTATION:
+        add_model_da_training_inputs(model)
+    else:
+        add_model_training_inputs(model)
 
     if weights_file:
         # Override random weight initialization with weights from a saved model
@@ -185,6 +186,24 @@ def add_model_training_inputs(model):
     logger.info('{:d} roidb entries'.format(len(roidb)))
     model_builder.add_training_inputs(model, roidb=roidb)
 
+def add_model_da_training_inputs(model):
+    """Load the training dataset and attach the training inputs to the model."""
+    logger = logging.getLogger(__name__)
+    logger.info('Loading dataset: {}'.format(cfg.TRAIN.SOURCE_DATASETS))
+    source_roidb = combined_roidb_for_training(
+        cfg.TRAIN.SOURCE_DATASETS, cfg.TRAIN.PROPOSAL_FILES, True
+    )
+    logger.info('{:d} roidb entries'.format(len(source_roidb)))
+    
+    logger.info('Loading dataset: {}'.format(cfg.TRAIN.TARGET_DATASETS))
+    target_roidb = combined_roidb_for_training(
+        cfg.TRAIN.TARGET_DATASETS, cfg.TRAIN.PROPOSAL_FILES, False
+    )
+    logger.info('{:d} roidb entries'.format(len(target_roidb)))
+    roidb = source_roidb+target_roidb
+    print(type(roidb[0]))
+    model_builder.add_training_inputs(model, roidb=roidb)
+
 
 def dump_proto_files(model, output_dir):
     """Save prototxt descriptions of the training network and parameter
@@ -197,3 +216,4 @@ def dump_proto_files(model, output_dir):
 def domain_adaptive_train():
     logger = logging.getLogger(__name__)
     logger.info('Begining domain adaptive training')
+    workspace.ResetWorkspace()

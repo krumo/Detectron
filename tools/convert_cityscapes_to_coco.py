@@ -84,8 +84,8 @@ def convert_cityscapes_instance_only(
     """Convert from cityscapes format to COCO instance seg format - polygons"""
     sets = [
         'gtFine_val',
-        # 'gtFine_train',
-        # 'gtFine_test',
+        'gtFine_train',
+        'gtFine_test',
 
         # 'gtCoarse_train',
         # 'gtCoarse_val',
@@ -93,8 +93,8 @@ def convert_cityscapes_instance_only(
     ]
     ann_dirs = [
         'gtFine_trainvaltest/gtFine/val',
-        # 'gtFine_trainvaltest/gtFine/train',
-        # 'gtFine_trainvaltest/gtFine/test',
+        'gtFine_trainvaltest/gtFine/train',
+        'gtFine_trainvaltest/gtFine/test',
 
         # 'gtCoarse/train',
         # 'gtCoarse/train_extra',
@@ -117,6 +117,9 @@ def convert_cityscapes_instance_only(
         'motorcycle',
         'bicycle',
     ]
+    for cls in category_instancesonly:
+        category_dict[cls] = cat_id
+        cat_id+=1
 
     for data_set, ann_dir in zip(sets, ann_dirs):
         print('Starting %s' % data_set)
@@ -127,6 +130,7 @@ def convert_cityscapes_instance_only(
         for root, _, files in os.walk(ann_dir):
             for filename in files:
                 if filename.endswith(ends_in % data_set.split('_')[0]):
+                    print(ends_in % data_set.split('_')[0])
                     if len(images) % 50 == 0:
                         print("Processed %s images, %s annotations" % (
                             len(images), len(annotations)))
@@ -154,12 +158,12 @@ def convert_cityscapes_instance_only(
 
                         for obj in objects[object_cls]:
                             if obj['contours'] == []:
-                                print('Warning: empty contours.')
+                                # print('Warning: empty contours.')
                                 continue  # skip non-instance categories
 
                             len_p = [len(p) for p in obj['contours']]
                             if min(len_p) <= 4:
-                                print('Warning: invalid contours.')
+                                # print('Warning: invalid contours.')
                                 continue  # skip non-instance categories
 
                             ann = {}
@@ -169,6 +173,7 @@ def convert_cityscapes_instance_only(
                             ann['segmentation'] = obj['contours']
 
                             if object_cls not in category_dict:
+                                print('warning')
                                 category_dict[object_cls] = cat_id
                                 cat_id += 1
                             ann['category_id'] = category_dict[object_cls]
@@ -181,10 +186,12 @@ def convert_cityscapes_instance_only(
                             annotations.append(ann)
 
         ann_dict['images'] = images
-        categories = [{"id": category_dict[name], "name": name} for name in
-                      category_dict]
+        # categories = [{"id": category_dict[name], "name": name} for name in
+        #               category_dict]
+        categories = [{"id": i+1, "name": name} for i, name in enumerate(category_instancesonly)]
         ann_dict['categories'] = categories
         ann_dict['annotations'] = annotations
+        print(categories)
         print("Num categories: %s" % len(categories))
         print("Num images: %s" % len(images))
         print("Num annotations: %s" % len(annotations))

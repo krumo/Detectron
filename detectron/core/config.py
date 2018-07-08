@@ -73,6 +73,9 @@ __C.TRAIN = AttrDict()
 
 __C.TRAIN.DOMAIN_ADAPTATION = False
 
+__C.TRAIN.SOURCE_DATASETS = ()
+__C.TRAIN.TARGET_DATASETS = ()
+
 # Initialize network with weights from this .pkl file
 __C.TRAIN.WEIGHTS = b''
 
