@@ -130,7 +130,7 @@ def convert_cityscapes_instance_only(
         for root, _, files in os.walk(ann_dir):
             for filename in files:
                 if filename.endswith(ends_in % data_set.split('_')[0]):
-                    print(ends_in % data_set.split('_')[0])
+                    # print(ends_in % data_set.split('_')[0])
                     if len(images) % 50 == 0:
                         print("Processed %s images, %s annotations" % (
                             len(images), len(annotations)))

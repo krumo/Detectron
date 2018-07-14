@@ -29,6 +29,7 @@ import detectron.roi_data.data_utils as data_utils
 import detectron.utils.blob as blob_utils
 import detectron.utils.boxes as box_utils
 
+import cv2
 logger = logging.getLogger(__name__)
 
 
@@ -56,6 +57,9 @@ def get_rpn_blob_names(is_training=True):
                 'rpn_bbox_inside_weights_wide',
                 'rpn_bbox_outside_weights_wide'
             ]
+        if cfg.TRAIN.DOMAIN_ADAPTATION:
+            blob_names += ['is_source']
+            blob_names += ['da_label']
     return blob_names
 
 
@@ -108,6 +112,18 @@ def add_rpn_blobs(blobs, im_scales, roidb):
             )
             for k, v in rpn_blobs.items():
                 blobs[k].append(v)
+        
+        if cfg.TRAIN.DOMAIN_ADAPTATION:
+            # print(roidb[0].keys())
+            # print(len(roidb[0]['boxes']))
+            da_label= np.zeros((1,2,36,67), dtype=np.int32)
+            if entry['is_source']:
+                blobs['is_source'].append(np.full((1,),True,dtype=np.bool_))
+                da_label[:,0,:,:] = 1
+            else:
+                blobs['is_source'].append(np.full((1,),False,dtype=np.bool_))
+                da_label[:,1,:,:] = 1
+            blobs['da_label'].append(da_label)
 
     for k, v in blobs.items():
         if isinstance(v, list) and len(v) > 0:
@@ -117,6 +133,19 @@ def add_rpn_blobs(blobs, im_scales, roidb):
         'has_visible_keypoints', 'boxes', 'segms', 'seg_areas', 'gt_classes',
         'gt_overlaps', 'is_crowd', 'box_to_gt_ind_map', 'gt_keypoints'
     ]
+
+    if cfg.TRAIN.DOMAIN_ADAPTATION:
+        valid_keys+=['is_source', 'dc_label', 'da_label']
+        # blobs['da_label']=np.zeros((1,2,36,67), dtype=np.int32)
+        # if roidb[0]['is_source']:
+        #     blobs['is_source']=np.full((1,),True,dtype=np.bool_)
+        #     blobs['da_label'][:,0,:,:] = 1
+        #     blobs['dc_label']=np.zeros((256,), dtype=np.int32)
+        # else:
+        #     blobs['is_source']=np.full((1,),False,dtype=np.bool_)
+        #     blobs['da_label'][:,1,:,:] = 1
+        #     blobs['dc_label']=np.ones((256,), dtype=np.int32)
+        
     minimal_roidb = [{} for _ in range(len(roidb))]
     for i, e in enumerate(roidb):
         for k in valid_keys:

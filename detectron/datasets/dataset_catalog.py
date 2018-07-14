@@ -251,6 +251,14 @@ _DATASETS = {
         _RAW_DIR:
             _DATA_DIR + '/foggy_cityscapes/raw'
     },
+    'foggy_cityscapes_unlabeled_instanceonly_seg_train': {
+        _IM_DIR:
+            _DATA_DIR + '/foggy_cityscapes/images',
+        _ANN_FN:
+            _DATA_DIR + '/foggy_cityscapes/unlabeled_annotations/instancesonly_filtered_unlabeled_train.json',
+        _RAW_DIR:
+            _DATA_DIR + '/foggy_cityscapes/raw'
+    },
 }
 
 

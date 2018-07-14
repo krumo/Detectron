@@ -24,3 +24,4 @@ detectron/datasets/data/*
 detectron/utils/cython_*.c
 
 *.pkl
+test/

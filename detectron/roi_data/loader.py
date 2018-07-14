@@ -103,7 +103,7 @@ class RoIDataLoader(object):
                 # self.get_output_names
                 ordered_blobs = OrderedDict()
                 for key in self.get_output_names():
-                    assert blobs[key].dtype in (np.int32, np.float32), \
+                    assert blobs[key].dtype in (np.int32, np.float32, np.bool_), \
                         'Blob {} of dtype {} must have dtype of ' \
                         'np.int32 or np.float32'.format(key, blobs[key].dtype)
                     ordered_blobs[key] = blobs[key]

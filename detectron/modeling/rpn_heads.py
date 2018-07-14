@@ -116,7 +116,7 @@ def add_single_scale_rpn_outputs(model, blob_in, dim_in, spatial_scale):
     if cfg.MODEL.FASTER_RCNN:
         if model.train:
             # Add op that generates training labels for in-network RPN proposals
-            model.GenerateProposalLabels(['rpn_rois', 'roidb', 'im_info'])
+            model.GenerateProposalLabels(['rpn_rois', 'roidb', 'im_info', 'is_source'])
         else:
             # Alias rois to rpn_rois for inference
             model.net.Alias('rpn_rois', 'rois')
@@ -147,6 +147,16 @@ def add_single_scale_rpn_losses(model):
         beta=1. / 9.,
         scale=model.GetLossScale()
     )
+    # zero = model.net.ConstantFill([],'zero', value=0.0)
+    # from caffe2.python import core, dyndep
+    # dyndep.InitOpsLibrary()
+    # op1 = core.CreateOperator(
+    #         "Conditional", ['is_source', 'loss_rpn_bbox', 'zero'], "updated_loss_rpn_bbox")
+    # op2 = core.CreateOperator(
+    #         "Conditional", ['is_source', 'loss_rpn_cls', 'zero'], "updated_loss_rpn_cls")
+    # model.net.Proto().op.extend([op1, op2])
+    # updated_loss_rpn_bbox = model.net.Conditional(['is_source', 'loss_rpn_bbox', 'zero'],'updated_loss_rpn_bbox')
+    # updated_loss_rpn_cls = model.net.Conditional(['is_source', 'loss_rpn_cls', 'zero'],'updated_loss_rpn_cls')
     loss_gradients = blob_utils.get_loss_gradients(
         model, [loss_rpn_cls, loss_rpn_bbox]
     )

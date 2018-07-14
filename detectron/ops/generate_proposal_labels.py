@@ -41,6 +41,8 @@ class GenerateProposalLabelsOp(object):
         roidb = blob_utils.deserialize(inputs[1].data)
         im_info = inputs[2].data
         im_scales = im_info[:, 2]
+        is_source = inputs[3].data
+        print(is_source)
         output_blob_names = fast_rcnn_roi_data.get_fast_rcnn_blob_names()
         # For historical consistency with the original Faster R-CNN
         # implementation we are *not* filtering crowd proposals.
@@ -49,6 +51,6 @@ class GenerateProposalLabelsOp(object):
         json_dataset.add_proposals(roidb, rois, im_scales, crowd_thresh=0)
         roidb_utils.add_bbox_regression_targets(roidb)
         blobs = {k: [] for k in output_blob_names}
-        fast_rcnn_roi_data.add_fast_rcnn_blobs(blobs, im_scales, roidb)
+        fast_rcnn_roi_data.add_fast_rcnn_blobs(blobs, im_scales, roidb, is_source)
         for i, k in enumerate(output_blob_names):
             blob_utils.py_op_copy_blob(blobs[k], outputs[i])

@@ -1,0 +1,1605 @@
+INFO train_net.py:  95: Called with args:
+INFO train_net.py:  96: Namespace(cfg_file='configs/datest_1gpu_e2e_faster_rcnn_R-50-cityscapes.yaml', multi_gpu_testing=False, opts=['OUTPUT_DIR', '/scratch_net/biwidl103/haowang/tmp/da/test/'], skip_test=False)
+INFO train_net.py: 102: Training with config:
+INFO train_net.py: 103: {'BBOX_XFORM_CLIP': 4.135166556742356,
+ 'CLUSTER': {'ON_CLUSTER': False},
+ 'DATA_LOADER': {'BLOBS_QUEUE_CAPACITY': 8,
+                 'MINIBATCH_QUEUE_SIZE': 64,
+                 'NUM_THREADS': 4},
+ 'DEDUP_BOXES': 0.0625,
+ 'DOWNLOAD_CACHE': '/tmp/detectron-download-cache',
+ 'EPS': 1e-14,
+ 'EXPECTED_RESULTS': [],
+ 'EXPECTED_RESULTS_ATOL': 0.005,
+ 'EXPECTED_RESULTS_EMAIL': '',
+ 'EXPECTED_RESULTS_RTOL': 0.1,
+ 'FAST_RCNN': {'CONV_HEAD_DIM': 256,
+               'MLP_HEAD_DIM': 1024,
+               'NUM_STACKED_CONVS': 4,
+               'ROI_BOX_HEAD': 'ResNet.add_ResNet_roi_conv5_head',
+               'ROI_XFORM_METHOD': 'RoIAlign',
+               'ROI_XFORM_RESOLUTION': 14,
+               'ROI_XFORM_SAMPLING_RATIO': 0},
+ 'FPN': {'COARSEST_STRIDE': 32,
+         'DIM': 256,
+         'EXTRA_CONV_LEVELS': False,
+         'FPN_ON': False,
+         'MULTILEVEL_ROIS': False,
+         'MULTILEVEL_RPN': False,
+         'ROI_CANONICAL_LEVEL': 4,
+         'ROI_CANONICAL_SCALE': 224,
+         'ROI_MAX_LEVEL': 5,
+         'ROI_MIN_LEVEL': 2,
+         'RPN_ANCHOR_START_SIZE': 32,
+         'RPN_ASPECT_RATIOS': (0.5, 1, 2),
+         'RPN_MAX_LEVEL': 6,
+         'RPN_MIN_LEVEL': 2,
+         'USE_GN': False,
+         'ZERO_INIT_LATERAL': False},
+ 'GROUP_NORM': {'DIM_PER_GP': -1, 'EPSILON': 1e-05, 'NUM_GROUPS': 32},
+ 'KRCNN': {'CONV_HEAD_DIM': 256,
+           'CONV_HEAD_KERNEL': 3,
+           'CONV_INIT': 'GaussianFill',
+           'DECONV_DIM': 256,
+           'DECONV_KERNEL': 4,
+           'DILATION': 1,
+           'HEATMAP_SIZE': -1,
+           'INFERENCE_MIN_SIZE': 0,
+           'KEYPOINT_CONFIDENCE': 'bbox',
+           'LOSS_WEIGHT': 1.0,
+           'MIN_KEYPOINT_COUNT_FOR_VALID_MINIBATCH': 20,
+           'NMS_OKS': False,
+           'NORMALIZE_BY_VISIBLE_KEYPOINTS': True,
+           'NUM_KEYPOINTS': -1,
+           'NUM_STACKED_CONVS': 8,
+           'ROI_KEYPOINTS_HEAD': '',
+           'ROI_XFORM_METHOD': 'RoIAlign',
+           'ROI_XFORM_RESOLUTION': 7,
+           'ROI_XFORM_SAMPLING_RATIO': 0,
+           'UP_SCALE': -1,
+           'USE_DECONV': False,
+           'USE_DECONV_OUTPUT': False},
+ 'MATLAB': 'matlab',
+ 'MEMONGER': True,
+ 'MEMONGER_SHARE_ACTIVATIONS': False,
+ 'MODEL': {'BBOX_REG_WEIGHTS': (10.0, 10.0, 5.0, 5.0),
+           'CLS_AGNOSTIC_BBOX_REG': False,
+           'CONV_BODY': 'ResNet.add_ResNet50_conv4_body',
+           'EXECUTION_TYPE': 'dag',
+           'FASTER_RCNN': True,
+           'KEYPOINTS_ON': False,
+           'MASK_ON': False,
+           'NUM_CLASSES': 9,
+           'RPN_ONLY': False,
+           'TYPE': 'generalized_rcnn'},
+ 'MRCNN': {'CLS_SPECIFIC_MASK': True,
+           'CONV_INIT': 'GaussianFill',
+           'DILATION': 2,
+           'DIM_REDUCED': 256,
+           'RESOLUTION': 14,
+           'ROI_MASK_HEAD': '',
+           'ROI_XFORM_METHOD': 'RoIAlign',
+           'ROI_XFORM_RESOLUTION': 7,
+           'ROI_XFORM_SAMPLING_RATIO': 0,
+           'THRESH_BINARIZE': 0.5,
+           'UPSAMPLE_RATIO': 1,
+           'USE_FC_OUTPUT': False,
+           'WEIGHT_LOSS_MASK': 1.0},
+ 'NUM_GPUS': 1,
+ 'OUTPUT_DIR': '/scratch_net/biwidl103/haowang/tmp/da/test/',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'RESNETS': {'NUM_GROUPS': 1,
+             'RES5_DILATION': 1,
+             'SHORTCUT_FUNC': 'basic_bn_shortcut',
+             'STEM_FUNC': 'basic_bn_stem',
+             'STRIDE_1X1': True,
+             'TRANS_FUNC': 'bottleneck_transformation',
+             'WIDTH_PER_GROUP': 64},
+ 'RETINANET': {'ANCHOR_SCALE': 4,
+               'ASPECT_RATIOS': (0.5, 1.0, 2.0),
+               'BBOX_REG_BETA': 0.11,
+               'BBOX_REG_WEIGHT': 1.0,
+               'CLASS_SPECIFIC_BBOX': False,
+               'INFERENCE_TH': 0.05,
+               'LOSS_ALPHA': 0.25,
+               'LOSS_GAMMA': 2.0,
+               'NEGATIVE_OVERLAP': 0.4,
+               'NUM_CONVS': 4,
+               'POSITIVE_OVERLAP': 0.5,
+               'PRE_NMS_TOP_N': 1000,
+               'PRIOR_PROB': 0.01,
+               'RETINANET_ON': False,
+               'SCALES_PER_OCTAVE': 3,
+               'SHARE_CLS_BBOX_TOWER': False,
+               'SOFTMAX': False},
+ 'RFCN': {'PS_GRID_SIZE': 3},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/scratch_net/biwidl103/haowang/detectron',
+ 'RPN': {'ASPECT_RATIOS': (0.5, 1, 2),
+         'RPN_ON': True,
+         'SIZES': (128, 256, 512),
+         'STRIDE': 16},
+ 'SOLVER': {'BASE_LR': 0.001,
+            'GAMMA': 0.1,
+            'LOG_LR_CHANGE_THRESHOLD': 1.1,
+            'LRS': [],
+            'LR_POLICY': 'steps_with_decay',
+            'MAX_ITER': 70000,
+            'MOMENTUM': 0.9,
+            'SCALE_MOMENTUM': True,
+            'SCALE_MOMENTUM_THRESHOLD': 1.1,
+            'STEPS': [0, 50000],
+            'STEP_SIZE': 30000,
+            'WARM_UP_FACTOR': 0.3333333333333333,
+            'WARM_UP_ITERS': 0,
+            'WARM_UP_METHOD': u'linear',
+            'WEIGHT_DECAY': 0.0005,
+            'WEIGHT_DECAY_GN': 0.0},
+ 'TEST': {'BBOX_AUG': {'AREA_TH_HI': 32400,
+                       'AREA_TH_LO': 2500,
+                       'ASPECT_RATIOS': (),
+                       'ASPECT_RATIO_H_FLIP': False,
+                       'COORD_HEUR': 'UNION',
+                       'ENABLED': False,
+                       'H_FLIP': False,
+                       'MAX_SIZE': 4000,
+                       'SCALES': (),
+                       'SCALE_H_FLIP': False,
+                       'SCALE_SIZE_DEP': False,
+                       'SCORE_HEUR': 'UNION'},
+          'BBOX_REG': True,
+          'BBOX_VOTE': {'ENABLED': False,
+                        'SCORING_METHOD': 'ID',
+                        'SCORING_METHOD_BETA': 1.0,
+                        'VOTE_TH': 0.8},
+          'COMPETITION_MODE': True,
+          'DATASETS': ('cityscapes_fine_instanceonly_seg_val',
+                       'foggy_cityscapes_fine_instanceonly_seg_val'),
+          'DETECTIONS_PER_IM': 100,
+          'FORCE_JSON_DATASET_EVAL': False,
+          'KPS_AUG': {'AREA_TH': 32400,
+                      'ASPECT_RATIOS': (),
+                      'ASPECT_RATIO_H_FLIP': False,
+                      'ENABLED': False,
+                      'HEUR': 'HM_AVG',
+                      'H_FLIP': False,
+                      'MAX_SIZE': 4000,
+                      'SCALES': (),
+                      'SCALE_H_FLIP': False,
+                      'SCALE_SIZE_DEP': False},
+          'MASK_AUG': {'AREA_TH': 32400,
+                       'ASPECT_RATIOS': (),
+                       'ASPECT_RATIO_H_FLIP': False,
+                       'ENABLED': False,
+                       'HEUR': 'SOFT_AVG',
+                       'H_FLIP': False,
+                       'MAX_SIZE': 4000,
+                       'SCALES': (),
+                       'SCALE_H_FLIP': False,
+                       'SCALE_SIZE_DEP': False},
+          'MAX_SIZE': 1333,
+          'NMS': 0.3,
+          'PRECOMPUTED_PROPOSALS': False,
+          'PROPOSAL_FILES': (),
+          'PROPOSAL_LIMIT': 2000,
+          'RPN_MIN_SIZE': 0,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 2000,
+          'SCALE': 500,
+          'SCORE_THRESH': 0.05,
+          'SOFT_NMS': {'ENABLED': False, 'METHOD': 'linear', 'SIGMA': 0.5},
+          'WEIGHTS': ''},
+ 'TRAIN': {'ASPECT_GROUPING': True,
+           'AUTO_RESUME': True,
+           'BATCH_SIZE_PER_IM': 256,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CROWD_FILTER_THRESH': 0.7,
+           'DATASETS': (),
+           'DOMAIN_ADAPTATION': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'FREEZE_AT': 2,
+           'FREEZE_CONV_BODY': False,
+           'GT_MIN_AREA': -1,
+           'IMS_PER_BATCH': 2,
+           'MAX_SIZE': 1333,
+           'PROPOSAL_FILES': (),
+           'RPN_BATCH_SIZE_PER_IM': 256,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 0,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'RPN_STRADDLE_THRESH': 0,
+           'SCALES': (500,),
+           'SNAPSHOT_ITERS': 20000,
+           'SOURCE_DATASETS': ('cityscapes_fine_instanceonly_seg_train',),
+           'TARGET_DATASETS': ('cityscapes_fine_instanceonly_seg_train',),
+           'USE_FLIPPED': True,
+           'WEIGHTS': u'/tmp/detectron-download-cache/ImageNetPretrained/MSRA/R-50.pkl'},
+ 'USE_NCCL': False,
+ 'VIS': False,
+ 'VIS_TH': 0.9}
+INFO train.py: 131: Building model: generalized_rcnn
+WARNING cnn.py:  25: [====DEPRECATE WARNING====]: you are creating an object from CNNModelHelper class which will be deprecated soon. Please use ModelHelper object with brew module. For more information, please refer to caffe2.ai and python/brew.py, python/brew_test.py for more information.
+WARNING model_helper.py: 461: You are creating an op that the ModelHelper does not recognize: NegateGradient.
+WARNING memonger.py:  55: NOTE: Executing memonger to optimize gradient memory
+INFO memonger.py:  97: Memonger memory optimization took 0.018002986908 secs
+INFO train.py: 192: Loading dataset: ('cityscapes_fine_instanceonly_seg_train',)
+INFO roidb.py:  50: Appending horizontally-flipped training examples...
+INFO roidb.py:  52: Loaded dataset: cityscapes_fine_instanceonly_seg_train
+INFO roidb.py: 138: Filtered 20 roidb entries: 5950 -> 5930
+INFO roidb.py:  70: Computing bounding-box regression targets...
+INFO roidb.py:  72: done
+INFO train.py: 196: 5930 roidb entries
+INFO train.py: 198: Loading dataset: ('cityscapes_fine_instanceonly_seg_train',)
+INFO roidb.py:  50: Appending horizontally-flipped training examples...
+INFO roidb.py:  52: Loaded dataset: cityscapes_fine_instanceonly_seg_train
+INFO roidb.py: 138: Filtered 20 roidb entries: 5950 -> 5930
+INFO roidb.py:  70: Computing bounding-box regression targets...
+INFO roidb.py:  72: done
+INFO train.py: 202: 5930 roidb entries
+INFO net.py:  59: Loading weights from: /tmp/detectron-download-cache/ImageNetPretrained/MSRA/R-50.pkl
+INFO net.py:  88: conv_rpn_w not found
+INFO net.py:  88: conv_rpn_b not found
+INFO net.py:  88: rpn_cls_logits_w not found
+INFO net.py:  88: rpn_cls_logits_b not found
+INFO net.py:  88: rpn_bbox_pred_w not found
+INFO net.py:  88: rpn_bbox_pred_b not found
+INFO net.py:  88: cls_score_w not found
+INFO net.py:  88: cls_score_b not found
+INFO net.py:  88: bbox_pred_w not found
+INFO net.py:  88: bbox_pred_b not found
+INFO net.py:  88: da_conv_1_w not found
+INFO net.py:  88: da_conv_1_b not found
+INFO net.py:  88: da_conv_2_w not found
+INFO net.py:  88: da_conv_2_b not found
+INFO net.py:  88: dc_ip1_w not found
+INFO net.py:  88: dc_ip1_b not found
+INFO net.py:  88: dc_ip2_w not found
+INFO net.py:  88: dc_ip2_b not found
+INFO net.py:  88: dc_ip3_w not found
+INFO net.py:  88: dc_ip3_b not found
+INFO train.py: 170: Outputs saved to: /scratch_net/biwidl103/haowang/tmp/da/test/train/generalized_rcnn
+INFO loader.py: 229: Pre-filling mini-batch queue...
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [2/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [2/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [5/64]
+INFO loader.py: 234:   [6/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [8/64]
+INFO loader.py: 234:   [9/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [12/64]
+INFO loader.py: 234:   [12/64]
+INFO loader.py: 234:   [13/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [17/64]
+INFO loader.py: 234:   [17/64]
+INFO loader.py: 234:   [18/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [21/64]
+INFO loader.py: 234:   [22/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [24/64]
+INFO loader.py: 234:   [25/64]
+INFO loader.py: 234:   [26/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [28/64]
+INFO loader.py: 234:   [28/64]
+INFO loader.py: 234:   [29/64]
+INFO loader.py: 234:   [30/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [32/64]
+INFO loader.py: 234:   [34/64]
+INFO loader.py: 234:   [34/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [36/64]
+INFO loader.py: 234:   [38/64]
+INFO loader.py: 234:   [38/64]
+INFO loader.py: 234:   [38/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [40/64]
+INFO loader.py: 234:   [40/64]
+INFO loader.py: 234:   [42/64]
+INFO loader.py: 234:   [42/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [44/64]
+INFO loader.py: 234:   [44/64]
+INFO loader.py: 234:   [45/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [48/64]
+INFO loader.py: 234:   [48/64]
+INFO loader.py: 234:   [48/64]
+INFO loader.py: 234:   [49/64]
+INFO loader.py: 234:   [50/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [52/64]
+INFO loader.py: 234:   [52/64]
+INFO loader.py: 234:   [54/64]
+INFO loader.py: 234:   [54/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [56/64]
+INFO loader.py: 234:   [57/64]
+INFO loader.py: 234:   [58/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [61/64]
+INFO loader.py: 234:   [61/64]
+INFO loader.py: 234:   [61/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO detector.py: 479: Changing learning rate 0.000000 -> 0.001000 at iter 0
+INFO net.py: 212: Printing model: generalized_rcnn
+INFO net.py: 249: data                        : (2, 3, 500, 1000)    => conv1                       : (2, 64, 250, 500)    ------- (op: Conv)
+INFO net.py: 249: conv1                       : (2, 64, 250, 500)    => conv1                       : (2, 64, 250, 500)    ------- (op: AffineChannel)
+INFO net.py: 249: conv1                       : (2, 64, 250, 500)    => conv1                       : (2, 64, 250, 500)    ------- (op: Relu)
+INFO net.py: 249: conv1                       : (2, 64, 250, 500)    => pool1                       : (2, 64, 125, 250)    ------- (op: MaxPool)
+INFO net.py: 249: pool1                       : (2, 64, 125, 250)    => res2_0_branch2a             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_0_branch2a             : (2, 64, 125, 250)    => res2_0_branch2a             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_0_branch2a             : (2, 64, 125, 250)    => res2_0_branch2a             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_0_branch2a             : (2, 64, 125, 250)    => res2_0_branch2b             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_0_branch2b             : (2, 64, 125, 250)    => res2_0_branch2b             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_0_branch2b             : (2, 64, 125, 250)    => res2_0_branch2b             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_0_branch2b             : (2, 64, 125, 250)    => res2_0_branch2c             : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_0_branch2c             : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: pool1                       : (2, 64, 125, 250)    => res2_0_branch1              : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_0_branch1              : (2, 256, 125, 250)   => res2_0_branch1_bn           : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Sum)
+INFO net.py: 249: res2_0_branch1_bn           : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------|
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Relu)
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2a             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_1_branch2a             : (2, 64, 125, 250)    => res2_1_branch2a             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_1_branch2a             : (2, 64, 125, 250)    => res2_1_branch2a             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_1_branch2a             : (2, 64, 125, 250)    => res2_1_branch2b             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_1_branch2b             : (2, 64, 125, 250)    => res2_1_branch2b             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_1_branch2b             : (2, 64, 125, 250)    => res2_1_branch2b             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_1_branch2b             : (2, 64, 125, 250)    => res2_1_branch2c             : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_1_branch2c             : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Sum)
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------|
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Relu)
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_2_branch2a             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_2_branch2a             : (2, 64, 125, 250)    => res2_2_branch2a             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_branch2a             : (2, 64, 125, 250)    => res2_2_branch2a             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_2_branch2a             : (2, 64, 125, 250)    => res2_2_branch2b             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_2_branch2b             : (2, 64, 125, 250)    => res2_2_branch2b             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_branch2b             : (2, 64, 125, 250)    => res2_2_branch2b             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_2_branch2b             : (2, 64, 125, 250)    => res2_2_branch2c             : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_2_branch2c             : (2, 256, 125, 250)   => res2_2_branch2c_bn          : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_branch2c_bn          : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------- (op: Sum)
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------|
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------- (op: Relu)
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------- (op: StopGradient)
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res3_0_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch2a             : (2, 128, 63, 125)    => res3_0_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_0_branch2a             : (2, 128, 63, 125)    => res3_0_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_0_branch2a             : (2, 128, 63, 125)    => res3_0_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch2b             : (2, 128, 63, 125)    => res3_0_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_0_branch2b             : (2, 128, 63, 125)    => res3_0_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_0_branch2b             : (2, 128, 63, 125)    => res3_0_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch2c             : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res3_0_branch1              : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch1              : (2, 512, 63, 125)    => res3_0_branch1_bn           : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_0_branch1_bn           : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_1_branch2a             : (2, 128, 63, 125)    => res3_1_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_1_branch2a             : (2, 128, 63, 125)    => res3_1_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_1_branch2a             : (2, 128, 63, 125)    => res3_1_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_1_branch2b             : (2, 128, 63, 125)    => res3_1_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_1_branch2b             : (2, 128, 63, 125)    => res3_1_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_1_branch2b             : (2, 128, 63, 125)    => res3_1_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_1_branch2c             : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_2_branch2a             : (2, 128, 63, 125)    => res3_2_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_2_branch2a             : (2, 128, 63, 125)    => res3_2_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_2_branch2a             : (2, 128, 63, 125)    => res3_2_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_2_branch2b             : (2, 128, 63, 125)    => res3_2_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_2_branch2b             : (2, 128, 63, 125)    => res3_2_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_2_branch2b             : (2, 128, 63, 125)    => res3_2_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_2_branch2c             : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_3_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_3_branch2a             : (2, 128, 63, 125)    => res3_3_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_branch2a             : (2, 128, 63, 125)    => res3_3_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_3_branch2a             : (2, 128, 63, 125)    => res3_3_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_3_branch2b             : (2, 128, 63, 125)    => res3_3_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_branch2b             : (2, 128, 63, 125)    => res3_3_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_3_branch2b             : (2, 128, 63, 125)    => res3_3_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_3_branch2c             : (2, 512, 63, 125)    => res3_3_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_branch2c_bn          : (2, 512, 63, 125)    => res3_3_sum                  : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_3_sum                  : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_3_sum                  : (2, 512, 63, 125)    => res3_3_sum                  : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_3_sum                  : (2, 512, 63, 125)    => res4_0_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_0_branch2a             : (2, 256, 32, 63)     => res4_0_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_0_branch2a             : (2, 256, 32, 63)     => res4_0_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_0_branch2a             : (2, 256, 32, 63)     => res4_0_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_0_branch2b             : (2, 256, 32, 63)     => res4_0_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_0_branch2b             : (2, 256, 32, 63)     => res4_0_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_0_branch2b             : (2, 256, 32, 63)     => res4_0_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_0_branch2c             : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_sum                  : (2, 512, 63, 125)    => res4_0_branch1              : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_0_branch1              : (2, 1024, 32, 63)    => res4_0_branch1_bn           : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_0_branch1_bn           : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_1_branch2a             : (2, 256, 32, 63)     => res4_1_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_1_branch2a             : (2, 256, 32, 63)     => res4_1_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_1_branch2a             : (2, 256, 32, 63)     => res4_1_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_1_branch2b             : (2, 256, 32, 63)     => res4_1_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_1_branch2b             : (2, 256, 32, 63)     => res4_1_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_1_branch2b             : (2, 256, 32, 63)     => res4_1_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_1_branch2c             : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_2_branch2a             : (2, 256, 32, 63)     => res4_2_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_2_branch2a             : (2, 256, 32, 63)     => res4_2_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_2_branch2a             : (2, 256, 32, 63)     => res4_2_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_2_branch2b             : (2, 256, 32, 63)     => res4_2_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_2_branch2b             : (2, 256, 32, 63)     => res4_2_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_2_branch2b             : (2, 256, 32, 63)     => res4_2_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_2_branch2c             : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_3_branch2a             : (2, 256, 32, 63)     => res4_3_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_3_branch2a             : (2, 256, 32, 63)     => res4_3_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_3_branch2a             : (2, 256, 32, 63)     => res4_3_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_3_branch2b             : (2, 256, 32, 63)     => res4_3_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_3_branch2b             : (2, 256, 32, 63)     => res4_3_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_3_branch2b             : (2, 256, 32, 63)     => res4_3_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_3_branch2c             : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_4_branch2a             : (2, 256, 32, 63)     => res4_4_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_4_branch2a             : (2, 256, 32, 63)     => res4_4_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_4_branch2a             : (2, 256, 32, 63)     => res4_4_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_4_branch2b             : (2, 256, 32, 63)     => res4_4_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_4_branch2b             : (2, 256, 32, 63)     => res4_4_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_4_branch2b             : (2, 256, 32, 63)     => res4_4_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_4_branch2c             : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_5_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_5_branch2a             : (2, 256, 32, 63)     => res4_5_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_5_branch2a             : (2, 256, 32, 63)     => res4_5_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_5_branch2a             : (2, 256, 32, 63)     => res4_5_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_5_branch2b             : (2, 256, 32, 63)     => res4_5_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_5_branch2b             : (2, 256, 32, 63)     => res4_5_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_5_branch2b             : (2, 256, 32, 63)     => res4_5_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_5_branch2c             : (2, 1024, 32, 63)    => res4_5_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_5_branch2c_bn          : (2, 1024, 32, 63)    => res4_5_sum                  : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_5_sum                  : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => res4_5_sum                  : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => conv_rpn                    : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: conv_rpn                    : (2, 1024, 32, 63)    => conv_rpn                    : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: conv_rpn                    : (2, 1024, 32, 63)    => rpn_cls_logits              : (2, 9, 32, 63)       ------- (op: Conv)
+INFO net.py: 249: conv_rpn                    : (2, 1024, 32, 63)    => rpn_bbox_pred               : (2, 36, 32, 63)      ------- (op: Conv)
+INFO net.py: 249: rpn_cls_logits              : (2, 9, 32, 63)       => rpn_cls_probs               : (2, 9, 32, 63)       ------- (op: Sigmoid)
+INFO net.py: 249: rpn_cls_probs               : (2, 9, 32, 63)       => rpn_rois                    : (4000, 5)            ------- (op: Python:GenerateProposalsOp:rpn_cls_probs,rpn_bbox_pred,im_info)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_rois                    : (4000, 5)            ------|
+INFO net.py: 249: im_info                     : (2, 3)               => rpn_rois                    : (4000, 5)            ------|
+INFO net.py: 249: rpn_rois                    : (4000, 5)            => rois                        : (512, 5)             ------- (op: Python:GenerateProposalLabelsOp:rpn_rois,roidb,im_info,is_source)
+INFO net.py: 249: roidb                       : (173709,)            => rois                        : (512, 5)             ------|
+INFO net.py: 249: im_info                     : (2, 3)               => rois                        : (512, 5)             ------|
+INFO net.py: 249: is_source                   : (2,)                 => rois                        : (512, 5)             ------|
+INFO net.py: 249: rpn_labels_int32_wide       : (2, 9, 84, 84)       => rpn_labels_int32            : (2, 9, 32, 63)       ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_cls_logits              : (2, 9, 32, 63)       => rpn_labels_int32            : (2, 9, 32, 63)       ------|
+INFO net.py: 249: rpn_bbox_targets_wide       : (2, 36, 84, 84)      => rpn_bbox_targets            : (2, 36, 32, 63)      ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_bbox_targets            : (2, 36, 32, 63)      ------|
+INFO net.py: 249: rpn_bbox_inside_weights_wide: (2, 36, 84, 84)      => rpn_bbox_inside_weights     : (2, 36, 32, 63)      ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_bbox_inside_weights     : (2, 36, 32, 63)      ------|
+INFO net.py: 249: rpn_bbox_outside_weights_wide: (2, 36, 84, 84)      => rpn_bbox_outside_weights    : (2, 36, 32, 63)      ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_bbox_outside_weights    : (2, 36, 32, 63)      ------|
+INFO net.py: 249: rpn_cls_logits              : (2, 9, 32, 63)       => loss_rpn_cls                : ()                   ------- (op: SigmoidCrossEntropyLoss)
+INFO net.py: 249: rpn_labels_int32            : (2, 9, 32, 63)       => loss_rpn_cls                : ()                   ------|
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------- (op: SmoothL1Loss)
+INFO net.py: 249: rpn_bbox_targets            : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------|
+INFO net.py: 249: rpn_bbox_inside_weights     : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------|
+INFO net.py: 249: rpn_bbox_outside_weights    : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------|
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => pool5                       : (512, 1024, 14, 14)  ------- (op: RoIAlign)
+INFO net.py: 249: rois                        : (512, 5)             => pool5                       : (512, 1024, 14, 14)  ------|
+INFO net.py: 249: pool5                       : (512, 1024, 14, 14)  => res5_0_branch2a             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_0_branch2a             : (512, 512, 7, 7)     => res5_0_branch2a             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_0_branch2a             : (512, 512, 7, 7)     => res5_0_branch2a             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_0_branch2a             : (512, 512, 7, 7)     => res5_0_branch2b             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_0_branch2b             : (512, 512, 7, 7)     => res5_0_branch2b             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_0_branch2b             : (512, 512, 7, 7)     => res5_0_branch2b             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_0_branch2b             : (512, 512, 7, 7)     => res5_0_branch2c             : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_0_branch2c             : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: pool5                       : (512, 1024, 14, 14)  => res5_0_branch1              : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_0_branch1              : (512, 2048, 7, 7)    => res5_0_branch1_bn           : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Sum)
+INFO net.py: 249: res5_0_branch1_bn           : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------|
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Relu)
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2a             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_1_branch2a             : (512, 512, 7, 7)     => res5_1_branch2a             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_1_branch2a             : (512, 512, 7, 7)     => res5_1_branch2a             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_1_branch2a             : (512, 512, 7, 7)     => res5_1_branch2b             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_1_branch2b             : (512, 512, 7, 7)     => res5_1_branch2b             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_1_branch2b             : (512, 512, 7, 7)     => res5_1_branch2b             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_1_branch2b             : (512, 512, 7, 7)     => res5_1_branch2c             : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_1_branch2c             : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Sum)
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------|
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Relu)
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_2_branch2a             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_2_branch2a             : (512, 512, 7, 7)     => res5_2_branch2a             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_2_branch2a             : (512, 512, 7, 7)     => res5_2_branch2a             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_2_branch2a             : (512, 512, 7, 7)     => res5_2_branch2b             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_2_branch2b             : (512, 512, 7, 7)     => res5_2_branch2b             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_2_branch2b             : (512, 512, 7, 7)     => res5_2_branch2b             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_2_branch2b             : (512, 512, 7, 7)     => res5_2_branch2c             : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_2_branch2c             : (512, 2048, 7, 7)    => res5_2_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: res5_2_branch2c_bn          : (512, 2048, 7, 7)    => res5_2_sum                  : (512, 2048, 7, 7)    ------- (op: Sum)
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_2_sum                  : (512, 2048, 7, 7)    ------|
+INFO net.py: 249: res5_2_sum                  : (512, 2048, 7, 7)    => res5_2_sum                  : (512, 2048, 7, 7)    ------- (op: Relu)
+INFO net.py: 249: res5_2_sum                  : (512, 2048, 7, 7)    => res5_pool                   : (512, 2048, 1, 1)    ------- (op: AveragePool)
+INFO net.py: 249: res5_pool                   : (512, 2048, 1, 1)    => cls_score                   : (512, 9)             ------- (op: FC)
+INFO net.py: 249: res5_pool                   : (512, 2048, 1, 1)    => bbox_pred                   : (512, 36)            ------- (op: FC)
+INFO net.py: 249: cls_score                   : (512, 9)             => cls_prob                    : (512, 9)             ------- (op: SoftmaxWithLoss)
+INFO net.py: 249: labels_int32                : (512,)               => cls_prob                    : (512, 9)             ------|
+INFO net.py: 249: bbox_pred                   : (512, 36)            => loss_bbox                   : ()                   ------- (op: SmoothL1Loss)
+INFO net.py: 249: bbox_targets                : (512, 36)            => loss_bbox                   : ()                   ------|
+INFO net.py: 249: bbox_inside_weights         : (512, 36)            => loss_bbox                   : ()                   ------|
+INFO net.py: 249: bbox_outside_weights        : (512, 36)            => loss_bbox                   : ()                   ------|
+INFO net.py: 249: cls_prob                    : (512, 9)             => accuracy_cls                : ()                   ------- (op: Accuracy)
+INFO net.py: 249: labels_int32                : (512,)               => accuracy_cls                : ()                   ------|
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => da_grl                      : (2, 1024, 32, 63)    ------- (op: NegateGradient)
+INFO net.py: 249: da_grl                      : (2, 1024, 32, 63)    => da_conv_1                   : (2, 512, 34, 65)     ------- (op: Conv)
+INFO net.py: 249: da_conv_1                   : (2, 512, 34, 65)     => da_conv_1                   : (2, 512, 34, 65)     ------- (op: Relu)
+INFO net.py: 249: da_conv_1                   : (2, 512, 34, 65)     => da_conv_2                   : (2, 2, 36, 67)       ------- (op: Conv)
+INFO net.py: 249: da_conv_2                   : (2, 2, 36, 67)       => loss_da                     : ()                   ------- (op: SigmoidCrossEntropyLoss)
+INFO net.py: 249: da_label                    : (2, 2, 36, 67)       => loss_da                     : ()                   ------|
+INFO net.py: 249: res5_pool                   : (512, 2048, 1, 1)    => dc_grl                      : (512, 2048, 1, 1)    ------- (op: NegateGradient)
+INFO net.py: 249: dc_grl                      : (512, 2048, 1, 1)    => dc_ip1                      : (512, 1024)          ------- (op: FC)
+INFO net.py: 249: dc_ip1                      : (512, 1024)          => dc_relu_1                   : (512, 1024)          ------- (op: Relu)
+INFO net.py: 249: dc_relu_1                   : (512, 1024)          => da_drop_1                   : (512, 1024)          ------- (op: Dropout)
+INFO net.py: 249: da_drop_1                   : (512, 1024)          => dc_ip2                      : (512, 1024)          ------- (op: FC)
+INFO net.py: 249: dc_ip2                      : (512, 1024)          => dc_relu_2                   : (512, 1024)          ------- (op: Relu)
+INFO net.py: 249: dc_relu_2                   : (512, 1024)          => da_drop_2                   : (512, 1024)          ------- (op: Dropout)
+INFO net.py: 249: da_drop_2                   : (512, 1024)          => dc_ip3                      : (512, 1)             ------- (op: FC)
+INFO net.py: 249: dc_ip3                      : (512, 1)             => loss_dc                     : ()                   ------- (op: SigmoidCrossEntropyLoss)
+INFO net.py: 249: dc_label                    : (512,)               => loss_dc                     : ()                   ------|
+INFO net.py: 253: End of model: generalized_rcnn
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 126: Stopping enqueue thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+WARNING workspace.py: 185: Original python traceback for operator `0` in network `generalized_rcnn` in exception above (most recent call last):
+WARNING workspace.py: 190:   File "tools/train_net.py", line 128, in <module>
+WARNING workspace.py: 190:   File "tools/train_net.py", line 110, in main
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/utils/train.py", line 53, in train_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/utils/train.py", line 132, in create_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 125, in create
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 90, in generalized_rcnn
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 246, in build_generic_detection_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/optimizer.py", line 40, in build_data_parallel_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/optimizer.py", line 63, in _build_forward_graph
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 171, in _single_gpu_build_func
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/ResNet.py", line 36, in add_ResNet50_conv4_body
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/ResNet.py", line 99, in add_ResNet_convX_body
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/ResNet.py", line 252, in basic_bn_stem
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/cnn.py", line 97, in Conv
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/brew.py", line 107, in scope_wrapper
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/helpers/conv.py", line 186, in conv
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/helpers/conv.py", line 139, in _ConvBase
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO train_net.py:  95: Called with args:
+INFO train_net.py:  96: Namespace(cfg_file='configs/datest_1gpu_e2e_faster_rcnn_R-50-cityscapes.yaml', multi_gpu_testing=False, opts=['OUTPUT_DIR', '/scratch_net/biwidl103/haowang/tmp/da/test/'], skip_test=False)
+INFO train_net.py: 102: Training with config:
+INFO train_net.py: 103: {'BBOX_XFORM_CLIP': 4.135166556742356,
+ 'CLUSTER': {'ON_CLUSTER': False},
+ 'DATA_LOADER': {'BLOBS_QUEUE_CAPACITY': 8,
+                 'MINIBATCH_QUEUE_SIZE': 64,
+                 'NUM_THREADS': 4},
+ 'DEDUP_BOXES': 0.0625,
+ 'DOWNLOAD_CACHE': '/tmp/detectron-download-cache',
+ 'EPS': 1e-14,
+ 'EXPECTED_RESULTS': [],
+ 'EXPECTED_RESULTS_ATOL': 0.005,
+ 'EXPECTED_RESULTS_EMAIL': '',
+ 'EXPECTED_RESULTS_RTOL': 0.1,
+ 'FAST_RCNN': {'CONV_HEAD_DIM': 256,
+               'MLP_HEAD_DIM': 1024,
+               'NUM_STACKED_CONVS': 4,
+               'ROI_BOX_HEAD': 'ResNet.add_ResNet_roi_conv5_head',
+               'ROI_XFORM_METHOD': 'RoIAlign',
+               'ROI_XFORM_RESOLUTION': 14,
+               'ROI_XFORM_SAMPLING_RATIO': 0},
+ 'FPN': {'COARSEST_STRIDE': 32,
+         'DIM': 256,
+         'EXTRA_CONV_LEVELS': False,
+         'FPN_ON': False,
+         'MULTILEVEL_ROIS': False,
+         'MULTILEVEL_RPN': False,
+         'ROI_CANONICAL_LEVEL': 4,
+         'ROI_CANONICAL_SCALE': 224,
+         'ROI_MAX_LEVEL': 5,
+         'ROI_MIN_LEVEL': 2,
+         'RPN_ANCHOR_START_SIZE': 32,
+         'RPN_ASPECT_RATIOS': (0.5, 1, 2),
+         'RPN_MAX_LEVEL': 6,
+         'RPN_MIN_LEVEL': 2,
+         'USE_GN': False,
+         'ZERO_INIT_LATERAL': False},
+ 'GROUP_NORM': {'DIM_PER_GP': -1, 'EPSILON': 1e-05, 'NUM_GROUPS': 32},
+ 'KRCNN': {'CONV_HEAD_DIM': 256,
+           'CONV_HEAD_KERNEL': 3,
+           'CONV_INIT': 'GaussianFill',
+           'DECONV_DIM': 256,
+           'DECONV_KERNEL': 4,
+           'DILATION': 1,
+           'HEATMAP_SIZE': -1,
+           'INFERENCE_MIN_SIZE': 0,
+           'KEYPOINT_CONFIDENCE': 'bbox',
+           'LOSS_WEIGHT': 1.0,
+           'MIN_KEYPOINT_COUNT_FOR_VALID_MINIBATCH': 20,
+           'NMS_OKS': False,
+           'NORMALIZE_BY_VISIBLE_KEYPOINTS': True,
+           'NUM_KEYPOINTS': -1,
+           'NUM_STACKED_CONVS': 8,
+           'ROI_KEYPOINTS_HEAD': '',
+           'ROI_XFORM_METHOD': 'RoIAlign',
+           'ROI_XFORM_RESOLUTION': 7,
+           'ROI_XFORM_SAMPLING_RATIO': 0,
+           'UP_SCALE': -1,
+           'USE_DECONV': False,
+           'USE_DECONV_OUTPUT': False},
+ 'MATLAB': 'matlab',
+ 'MEMONGER': True,
+ 'MEMONGER_SHARE_ACTIVATIONS': False,
+ 'MODEL': {'BBOX_REG_WEIGHTS': (10.0, 10.0, 5.0, 5.0),
+           'CLS_AGNOSTIC_BBOX_REG': False,
+           'CONV_BODY': 'ResNet.add_ResNet50_conv4_body',
+           'EXECUTION_TYPE': 'dag',
+           'FASTER_RCNN': True,
+           'KEYPOINTS_ON': False,
+           'MASK_ON': False,
+           'NUM_CLASSES': 9,
+           'RPN_ONLY': False,
+           'TYPE': 'generalized_rcnn'},
+ 'MRCNN': {'CLS_SPECIFIC_MASK': True,
+           'CONV_INIT': 'GaussianFill',
+           'DILATION': 2,
+           'DIM_REDUCED': 256,
+           'RESOLUTION': 14,
+           'ROI_MASK_HEAD': '',
+           'ROI_XFORM_METHOD': 'RoIAlign',
+           'ROI_XFORM_RESOLUTION': 7,
+           'ROI_XFORM_SAMPLING_RATIO': 0,
+           'THRESH_BINARIZE': 0.5,
+           'UPSAMPLE_RATIO': 1,
+           'USE_FC_OUTPUT': False,
+           'WEIGHT_LOSS_MASK': 1.0},
+ 'NUM_GPUS': 1,
+ 'OUTPUT_DIR': '/scratch_net/biwidl103/haowang/tmp/da/test/',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'RESNETS': {'NUM_GROUPS': 1,
+             'RES5_DILATION': 1,
+             'SHORTCUT_FUNC': 'basic_bn_shortcut',
+             'STEM_FUNC': 'basic_bn_stem',
+             'STRIDE_1X1': True,
+             'TRANS_FUNC': 'bottleneck_transformation',
+             'WIDTH_PER_GROUP': 64},
+ 'RETINANET': {'ANCHOR_SCALE': 4,
+               'ASPECT_RATIOS': (0.5, 1.0, 2.0),
+               'BBOX_REG_BETA': 0.11,
+               'BBOX_REG_WEIGHT': 1.0,
+               'CLASS_SPECIFIC_BBOX': False,
+               'INFERENCE_TH': 0.05,
+               'LOSS_ALPHA': 0.25,
+               'LOSS_GAMMA': 2.0,
+               'NEGATIVE_OVERLAP': 0.4,
+               'NUM_CONVS': 4,
+               'POSITIVE_OVERLAP': 0.5,
+               'PRE_NMS_TOP_N': 1000,
+               'PRIOR_PROB': 0.01,
+               'RETINANET_ON': False,
+               'SCALES_PER_OCTAVE': 3,
+               'SHARE_CLS_BBOX_TOWER': False,
+               'SOFTMAX': False},
+ 'RFCN': {'PS_GRID_SIZE': 3},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/scratch_net/biwidl103/haowang/detectron',
+ 'RPN': {'ASPECT_RATIOS': (0.5, 1, 2),
+         'RPN_ON': True,
+         'SIZES': (128, 256, 512),
+         'STRIDE': 16},
+ 'SOLVER': {'BASE_LR': 0.001,
+            'GAMMA': 0.1,
+            'LOG_LR_CHANGE_THRESHOLD': 1.1,
+            'LRS': [],
+            'LR_POLICY': 'steps_with_decay',
+            'MAX_ITER': 70000,
+            'MOMENTUM': 0.9,
+            'SCALE_MOMENTUM': True,
+            'SCALE_MOMENTUM_THRESHOLD': 1.1,
+            'STEPS': [0, 50000],
+            'STEP_SIZE': 30000,
+            'WARM_UP_FACTOR': 0.3333333333333333,
+            'WARM_UP_ITERS': 0,
+            'WARM_UP_METHOD': u'linear',
+            'WEIGHT_DECAY': 0.0005,
+            'WEIGHT_DECAY_GN': 0.0},
+ 'TEST': {'BBOX_AUG': {'AREA_TH_HI': 32400,
+                       'AREA_TH_LO': 2500,
+                       'ASPECT_RATIOS': (),
+                       'ASPECT_RATIO_H_FLIP': False,
+                       'COORD_HEUR': 'UNION',
+                       'ENABLED': False,
+                       'H_FLIP': False,
+                       'MAX_SIZE': 4000,
+                       'SCALES': (),
+                       'SCALE_H_FLIP': False,
+                       'SCALE_SIZE_DEP': False,
+                       'SCORE_HEUR': 'UNION'},
+          'BBOX_REG': True,
+          'BBOX_VOTE': {'ENABLED': False,
+                        'SCORING_METHOD': 'ID',
+                        'SCORING_METHOD_BETA': 1.0,
+                        'VOTE_TH': 0.8},
+          'COMPETITION_MODE': True,
+          'DATASETS': ('cityscapes_fine_instanceonly_seg_val',
+                       'foggy_cityscapes_fine_instanceonly_seg_val'),
+          'DETECTIONS_PER_IM': 100,
+          'FORCE_JSON_DATASET_EVAL': False,
+          'KPS_AUG': {'AREA_TH': 32400,
+                      'ASPECT_RATIOS': (),
+                      'ASPECT_RATIO_H_FLIP': False,
+                      'ENABLED': False,
+                      'HEUR': 'HM_AVG',
+                      'H_FLIP': False,
+                      'MAX_SIZE': 4000,
+                      'SCALES': (),
+                      'SCALE_H_FLIP': False,
+                      'SCALE_SIZE_DEP': False},
+          'MASK_AUG': {'AREA_TH': 32400,
+                       'ASPECT_RATIOS': (),
+                       'ASPECT_RATIO_H_FLIP': False,
+                       'ENABLED': False,
+                       'HEUR': 'SOFT_AVG',
+                       'H_FLIP': False,
+                       'MAX_SIZE': 4000,
+                       'SCALES': (),
+                       'SCALE_H_FLIP': False,
+                       'SCALE_SIZE_DEP': False},
+          'MAX_SIZE': 1333,
+          'NMS': 0.3,
+          'PRECOMPUTED_PROPOSALS': False,
+          'PROPOSAL_FILES': (),
+          'PROPOSAL_LIMIT': 2000,
+          'RPN_MIN_SIZE': 0,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 2000,
+          'SCALE': 500,
+          'SCORE_THRESH': 0.05,
+          'SOFT_NMS': {'ENABLED': False, 'METHOD': 'linear', 'SIGMA': 0.5},
+          'WEIGHTS': ''},
+ 'TRAIN': {'ASPECT_GROUPING': True,
+           'AUTO_RESUME': True,
+           'BATCH_SIZE_PER_IM': 256,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CROWD_FILTER_THRESH': 0.7,
+           'DATASETS': (),
+           'DOMAIN_ADAPTATION': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'FREEZE_AT': 2,
+           'FREEZE_CONV_BODY': False,
+           'GT_MIN_AREA': -1,
+           'IMS_PER_BATCH': 2,
+           'MAX_SIZE': 1333,
+           'PROPOSAL_FILES': (),
+           'RPN_BATCH_SIZE_PER_IM': 256,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 0,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'RPN_STRADDLE_THRESH': 0,
+           'SCALES': (500,),
+           'SNAPSHOT_ITERS': 20000,
+           'SOURCE_DATASETS': ('cityscapes_fine_instanceonly_seg_train',),
+           'TARGET_DATASETS': ('cityscapes_fine_instanceonly_seg_train',),
+           'USE_FLIPPED': True,
+           'WEIGHTS': u'/tmp/detectron-download-cache/ImageNetPretrained/MSRA/R-50.pkl'},
+ 'USE_NCCL': False,
+ 'VIS': False,
+ 'VIS_TH': 0.9}
+INFO train.py: 131: Building model: generalized_rcnn
+WARNING cnn.py:  25: [====DEPRECATE WARNING====]: you are creating an object from CNNModelHelper class which will be deprecated soon. Please use ModelHelper object with brew module. For more information, please refer to caffe2.ai and python/brew.py, python/brew_test.py for more information.
+WARNING model_helper.py: 461: You are creating an op that the ModelHelper does not recognize: NegateGradient.
+WARNING memonger.py:  55: NOTE: Executing memonger to optimize gradient memory
+INFO memonger.py:  97: Memonger memory optimization took 0.0163111686707 secs
+INFO train.py: 192: Loading dataset: ('cityscapes_fine_instanceonly_seg_train',)
+INFO roidb.py:  50: Appending horizontally-flipped training examples...
+INFO roidb.py:  52: Loaded dataset: cityscapes_fine_instanceonly_seg_train
+INFO roidb.py: 138: Filtered 20 roidb entries: 5950 -> 5930
+INFO roidb.py:  70: Computing bounding-box regression targets...
+INFO roidb.py:  72: done
+INFO train.py: 196: 5930 roidb entries
+INFO train.py: 198: Loading dataset: ('cityscapes_fine_instanceonly_seg_train',)
+INFO roidb.py:  50: Appending horizontally-flipped training examples...
+INFO roidb.py:  52: Loaded dataset: cityscapes_fine_instanceonly_seg_train
+INFO roidb.py: 138: Filtered 20 roidb entries: 5950 -> 5930
+INFO roidb.py:  70: Computing bounding-box regression targets...
+INFO roidb.py:  72: done
+INFO train.py: 202: 5930 roidb entries
+INFO net.py:  59: Loading weights from: /tmp/detectron-download-cache/ImageNetPretrained/MSRA/R-50.pkl
+INFO net.py:  88: conv_rpn_w not found
+INFO net.py:  88: conv_rpn_b not found
+INFO net.py:  88: rpn_cls_logits_w not found
+INFO net.py:  88: rpn_cls_logits_b not found
+INFO net.py:  88: rpn_bbox_pred_w not found
+INFO net.py:  88: rpn_bbox_pred_b not found
+INFO net.py:  88: cls_score_w not found
+INFO net.py:  88: cls_score_b not found
+INFO net.py:  88: bbox_pred_w not found
+INFO net.py:  88: bbox_pred_b not found
+INFO net.py:  88: da_conv_1_w not found
+INFO net.py:  88: da_conv_1_b not found
+INFO net.py:  88: da_conv_2_w not found
+INFO net.py:  88: da_conv_2_b not found
+INFO net.py:  88: dc_ip1_w not found
+INFO net.py:  88: dc_ip1_b not found
+INFO net.py:  88: dc_ip2_w not found
+INFO net.py:  88: dc_ip2_b not found
+INFO net.py:  88: dc_ip3_w not found
+INFO net.py:  88: dc_ip3_b not found
+INFO train.py: 170: Outputs saved to: /scratch_net/biwidl103/haowang/tmp/da/test/train/generalized_rcnn
+INFO loader.py: 229: Pre-filling mini-batch queue...
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [2/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [2/64]
+INFO loader.py: 234:   [2/64]
+INFO loader.py: 234:   [1/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [0/64]
+INFO loader.py: 234:   [2/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [3/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [7/64]
+INFO loader.py: 234:   [8/64]
+INFO loader.py: 234:   [8/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [11/64]
+INFO loader.py: 234:   [12/64]
+INFO loader.py: 234:   [12/64]
+INFO loader.py: 234:   [13/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [15/64]
+INFO loader.py: 234:   [16/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [19/64]
+INFO loader.py: 234:   [20/64]
+INFO loader.py: 234:   [20/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [23/64]
+INFO loader.py: 234:   [24/64]
+INFO loader.py: 234:   [25/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [27/64]
+INFO loader.py: 234:   [28/64]
+INFO loader.py: 234:   [29/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [31/64]
+INFO loader.py: 234:   [34/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [35/64]
+INFO loader.py: 234:   [37/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [39/64]
+INFO loader.py: 234:   [40/64]
+INFO loader.py: 234:   [41/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [43/64]
+INFO loader.py: 234:   [45/64]
+INFO loader.py: 234:   [46/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [47/64]
+INFO loader.py: 234:   [48/64]
+INFO loader.py: 234:   [48/64]
+INFO loader.py: 234:   [50/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [51/64]
+INFO loader.py: 234:   [52/64]
+INFO loader.py: 234:   [52/64]
+INFO loader.py: 234:   [54/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [55/64]
+INFO loader.py: 234:   [57/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [59/64]
+INFO loader.py: 234:   [60/64]
+INFO loader.py: 234:   [61/64]
+INFO loader.py: 234:   [61/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO loader.py: 234:   [63/64]
+INFO detector.py: 479: Changing learning rate 0.000000 -> 0.001000 at iter 0
+INFO net.py: 212: Printing model: generalized_rcnn
+INFO net.py: 249: data                        : (2, 3, 500, 1000)    => conv1                       : (2, 64, 250, 500)    ------- (op: Conv)
+INFO net.py: 249: conv1                       : (2, 64, 250, 500)    => conv1                       : (2, 64, 250, 500)    ------- (op: AffineChannel)
+INFO net.py: 249: conv1                       : (2, 64, 250, 500)    => conv1                       : (2, 64, 250, 500)    ------- (op: Relu)
+INFO net.py: 249: conv1                       : (2, 64, 250, 500)    => pool1                       : (2, 64, 125, 250)    ------- (op: MaxPool)
+INFO net.py: 249: pool1                       : (2, 64, 125, 250)    => res2_0_branch2a             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_0_branch2a             : (2, 64, 125, 250)    => res2_0_branch2a             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_0_branch2a             : (2, 64, 125, 250)    => res2_0_branch2a             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_0_branch2a             : (2, 64, 125, 250)    => res2_0_branch2b             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_0_branch2b             : (2, 64, 125, 250)    => res2_0_branch2b             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_0_branch2b             : (2, 64, 125, 250)    => res2_0_branch2b             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_0_branch2b             : (2, 64, 125, 250)    => res2_0_branch2c             : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_0_branch2c             : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: pool1                       : (2, 64, 125, 250)    => res2_0_branch1              : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_0_branch1              : (2, 256, 125, 250)   => res2_0_branch1_bn           : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Sum)
+INFO net.py: 249: res2_0_branch1_bn           : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------|
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_0_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Relu)
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2a             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_1_branch2a             : (2, 64, 125, 250)    => res2_1_branch2a             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_1_branch2a             : (2, 64, 125, 250)    => res2_1_branch2a             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_1_branch2a             : (2, 64, 125, 250)    => res2_1_branch2b             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_1_branch2b             : (2, 64, 125, 250)    => res2_1_branch2b             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_1_branch2b             : (2, 64, 125, 250)    => res2_1_branch2b             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_1_branch2b             : (2, 64, 125, 250)    => res2_1_branch2c             : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_1_branch2c             : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Sum)
+INFO net.py: 249: res2_0_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------|
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_1_branch2c_bn          : (2, 256, 125, 250)   ------- (op: Relu)
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_2_branch2a             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_2_branch2a             : (2, 64, 125, 250)    => res2_2_branch2a             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_branch2a             : (2, 64, 125, 250)    => res2_2_branch2a             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_2_branch2a             : (2, 64, 125, 250)    => res2_2_branch2b             : (2, 64, 125, 250)    ------- (op: Conv)
+INFO net.py: 249: res2_2_branch2b             : (2, 64, 125, 250)    => res2_2_branch2b             : (2, 64, 125, 250)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_branch2b             : (2, 64, 125, 250)    => res2_2_branch2b             : (2, 64, 125, 250)    ------- (op: Relu)
+INFO net.py: 249: res2_2_branch2b             : (2, 64, 125, 250)    => res2_2_branch2c             : (2, 256, 125, 250)   ------- (op: Conv)
+INFO net.py: 249: res2_2_branch2c             : (2, 256, 125, 250)   => res2_2_branch2c_bn          : (2, 256, 125, 250)   ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_branch2c_bn          : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------- (op: Sum)
+INFO net.py: 249: res2_1_branch2c_bn          : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------|
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------- (op: Relu)
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res2_2_sum                  : (2, 256, 125, 250)   ------- (op: StopGradient)
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res3_0_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch2a             : (2, 128, 63, 125)    => res3_0_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_0_branch2a             : (2, 128, 63, 125)    => res3_0_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_0_branch2a             : (2, 128, 63, 125)    => res3_0_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch2b             : (2, 128, 63, 125)    => res3_0_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_0_branch2b             : (2, 128, 63, 125)    => res3_0_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_0_branch2b             : (2, 128, 63, 125)    => res3_0_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch2c             : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res2_2_sum                  : (2, 256, 125, 250)   => res3_0_branch1              : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_0_branch1              : (2, 512, 63, 125)    => res3_0_branch1_bn           : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_0_branch1_bn           : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_0_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_1_branch2a             : (2, 128, 63, 125)    => res3_1_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_1_branch2a             : (2, 128, 63, 125)    => res3_1_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_1_branch2a             : (2, 128, 63, 125)    => res3_1_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_1_branch2b             : (2, 128, 63, 125)    => res3_1_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_1_branch2b             : (2, 128, 63, 125)    => res3_1_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_1_branch2b             : (2, 128, 63, 125)    => res3_1_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_1_branch2c             : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_0_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_1_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_2_branch2a             : (2, 128, 63, 125)    => res3_2_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_2_branch2a             : (2, 128, 63, 125)    => res3_2_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_2_branch2a             : (2, 128, 63, 125)    => res3_2_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_2_branch2b             : (2, 128, 63, 125)    => res3_2_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_2_branch2b             : (2, 128, 63, 125)    => res3_2_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_2_branch2b             : (2, 128, 63, 125)    => res3_2_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_2_branch2c             : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_1_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_2_branch2c_bn          : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_3_branch2a             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_3_branch2a             : (2, 128, 63, 125)    => res3_3_branch2a             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_branch2a             : (2, 128, 63, 125)    => res3_3_branch2a             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_3_branch2a             : (2, 128, 63, 125)    => res3_3_branch2b             : (2, 128, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_3_branch2b             : (2, 128, 63, 125)    => res3_3_branch2b             : (2, 128, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_branch2b             : (2, 128, 63, 125)    => res3_3_branch2b             : (2, 128, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_3_branch2b             : (2, 128, 63, 125)    => res3_3_branch2c             : (2, 512, 63, 125)    ------- (op: Conv)
+INFO net.py: 249: res3_3_branch2c             : (2, 512, 63, 125)    => res3_3_branch2c_bn          : (2, 512, 63, 125)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_branch2c_bn          : (2, 512, 63, 125)    => res3_3_sum                  : (2, 512, 63, 125)    ------- (op: Sum)
+INFO net.py: 249: res3_2_branch2c_bn          : (2, 512, 63, 125)    => res3_3_sum                  : (2, 512, 63, 125)    ------|
+INFO net.py: 249: res3_3_sum                  : (2, 512, 63, 125)    => res3_3_sum                  : (2, 512, 63, 125)    ------- (op: Relu)
+INFO net.py: 249: res3_3_sum                  : (2, 512, 63, 125)    => res4_0_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_0_branch2a             : (2, 256, 32, 63)     => res4_0_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_0_branch2a             : (2, 256, 32, 63)     => res4_0_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_0_branch2a             : (2, 256, 32, 63)     => res4_0_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_0_branch2b             : (2, 256, 32, 63)     => res4_0_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_0_branch2b             : (2, 256, 32, 63)     => res4_0_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_0_branch2b             : (2, 256, 32, 63)     => res4_0_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_0_branch2c             : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res3_3_sum                  : (2, 512, 63, 125)    => res4_0_branch1              : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_0_branch1              : (2, 1024, 32, 63)    => res4_0_branch1_bn           : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_0_branch1_bn           : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_0_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_1_branch2a             : (2, 256, 32, 63)     => res4_1_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_1_branch2a             : (2, 256, 32, 63)     => res4_1_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_1_branch2a             : (2, 256, 32, 63)     => res4_1_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_1_branch2b             : (2, 256, 32, 63)     => res4_1_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_1_branch2b             : (2, 256, 32, 63)     => res4_1_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_1_branch2b             : (2, 256, 32, 63)     => res4_1_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_1_branch2c             : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_0_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_1_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_2_branch2a             : (2, 256, 32, 63)     => res4_2_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_2_branch2a             : (2, 256, 32, 63)     => res4_2_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_2_branch2a             : (2, 256, 32, 63)     => res4_2_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_2_branch2b             : (2, 256, 32, 63)     => res4_2_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_2_branch2b             : (2, 256, 32, 63)     => res4_2_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_2_branch2b             : (2, 256, 32, 63)     => res4_2_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_2_branch2c             : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_1_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_2_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_3_branch2a             : (2, 256, 32, 63)     => res4_3_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_3_branch2a             : (2, 256, 32, 63)     => res4_3_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_3_branch2a             : (2, 256, 32, 63)     => res4_3_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_3_branch2b             : (2, 256, 32, 63)     => res4_3_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_3_branch2b             : (2, 256, 32, 63)     => res4_3_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_3_branch2b             : (2, 256, 32, 63)     => res4_3_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_3_branch2c             : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_2_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_3_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_4_branch2a             : (2, 256, 32, 63)     => res4_4_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_4_branch2a             : (2, 256, 32, 63)     => res4_4_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_4_branch2a             : (2, 256, 32, 63)     => res4_4_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_4_branch2b             : (2, 256, 32, 63)     => res4_4_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_4_branch2b             : (2, 256, 32, 63)     => res4_4_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_4_branch2b             : (2, 256, 32, 63)     => res4_4_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_4_branch2c             : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_3_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_4_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_5_branch2a             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_5_branch2a             : (2, 256, 32, 63)     => res4_5_branch2a             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_5_branch2a             : (2, 256, 32, 63)     => res4_5_branch2a             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_5_branch2a             : (2, 256, 32, 63)     => res4_5_branch2b             : (2, 256, 32, 63)     ------- (op: Conv)
+INFO net.py: 249: res4_5_branch2b             : (2, 256, 32, 63)     => res4_5_branch2b             : (2, 256, 32, 63)     ------- (op: AffineChannel)
+INFO net.py: 249: res4_5_branch2b             : (2, 256, 32, 63)     => res4_5_branch2b             : (2, 256, 32, 63)     ------- (op: Relu)
+INFO net.py: 249: res4_5_branch2b             : (2, 256, 32, 63)     => res4_5_branch2c             : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: res4_5_branch2c             : (2, 1024, 32, 63)    => res4_5_branch2c_bn          : (2, 1024, 32, 63)    ------- (op: AffineChannel)
+INFO net.py: 249: res4_5_branch2c_bn          : (2, 1024, 32, 63)    => res4_5_sum                  : (2, 1024, 32, 63)    ------- (op: Sum)
+INFO net.py: 249: res4_4_branch2c_bn          : (2, 1024, 32, 63)    => res4_5_sum                  : (2, 1024, 32, 63)    ------|
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => res4_5_sum                  : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => conv_rpn                    : (2, 1024, 32, 63)    ------- (op: Conv)
+INFO net.py: 249: conv_rpn                    : (2, 1024, 32, 63)    => conv_rpn                    : (2, 1024, 32, 63)    ------- (op: Relu)
+INFO net.py: 249: conv_rpn                    : (2, 1024, 32, 63)    => rpn_cls_logits              : (2, 9, 32, 63)       ------- (op: Conv)
+INFO net.py: 249: conv_rpn                    : (2, 1024, 32, 63)    => rpn_bbox_pred               : (2, 36, 32, 63)      ------- (op: Conv)
+INFO net.py: 249: rpn_cls_logits              : (2, 9, 32, 63)       => rpn_cls_probs               : (2, 9, 32, 63)       ------- (op: Sigmoid)
+INFO net.py: 249: rpn_cls_probs               : (2, 9, 32, 63)       => rpn_rois                    : (3927, 5)            ------- (op: Python:GenerateProposalsOp:rpn_cls_probs,rpn_bbox_pred,im_info)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_rois                    : (3927, 5)            ------|
+INFO net.py: 249: im_info                     : (2, 3)               => rpn_rois                    : (3927, 5)            ------|
+INFO net.py: 249: rpn_rois                    : (3927, 5)            => rois                        : (512, 5)             ------- (op: Python:GenerateProposalLabelsOp:rpn_rois,roidb,im_info,is_source)
+INFO net.py: 249: roidb                       : (173709,)            => rois                        : (512, 5)             ------|
+INFO net.py: 249: im_info                     : (2, 3)               => rois                        : (512, 5)             ------|
+INFO net.py: 249: is_source                   : (2,)                 => rois                        : (512, 5)             ------|
+INFO net.py: 249: rpn_labels_int32_wide       : (2, 9, 84, 84)       => rpn_labels_int32            : (2, 9, 32, 63)       ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_cls_logits              : (2, 9, 32, 63)       => rpn_labels_int32            : (2, 9, 32, 63)       ------|
+INFO net.py: 249: rpn_bbox_targets_wide       : (2, 36, 84, 84)      => rpn_bbox_targets            : (2, 36, 32, 63)      ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_bbox_targets            : (2, 36, 32, 63)      ------|
+INFO net.py: 249: rpn_bbox_inside_weights_wide: (2, 36, 84, 84)      => rpn_bbox_inside_weights     : (2, 36, 32, 63)      ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_bbox_inside_weights     : (2, 36, 32, 63)      ------|
+INFO net.py: 249: rpn_bbox_outside_weights_wide: (2, 36, 84, 84)      => rpn_bbox_outside_weights    : (2, 36, 32, 63)      ------- (op: SpatialNarrowAs)
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => rpn_bbox_outside_weights    : (2, 36, 32, 63)      ------|
+INFO net.py: 249: rpn_cls_logits              : (2, 9, 32, 63)       => loss_rpn_cls                : ()                   ------- (op: SigmoidCrossEntropyLoss)
+INFO net.py: 249: rpn_labels_int32            : (2, 9, 32, 63)       => loss_rpn_cls                : ()                   ------|
+INFO net.py: 249: rpn_bbox_pred               : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------- (op: SmoothL1Loss)
+INFO net.py: 249: rpn_bbox_targets            : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------|
+INFO net.py: 249: rpn_bbox_inside_weights     : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------|
+INFO net.py: 249: rpn_bbox_outside_weights    : (2, 36, 32, 63)      => loss_rpn_bbox               : ()                   ------|
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => pool5                       : (512, 1024, 14, 14)  ------- (op: RoIAlign)
+INFO net.py: 249: rois                        : (512, 5)             => pool5                       : (512, 1024, 14, 14)  ------|
+INFO net.py: 249: pool5                       : (512, 1024, 14, 14)  => res5_0_branch2a             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_0_branch2a             : (512, 512, 7, 7)     => res5_0_branch2a             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_0_branch2a             : (512, 512, 7, 7)     => res5_0_branch2a             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_0_branch2a             : (512, 512, 7, 7)     => res5_0_branch2b             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_0_branch2b             : (512, 512, 7, 7)     => res5_0_branch2b             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_0_branch2b             : (512, 512, 7, 7)     => res5_0_branch2b             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_0_branch2b             : (512, 512, 7, 7)     => res5_0_branch2c             : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_0_branch2c             : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: pool5                       : (512, 1024, 14, 14)  => res5_0_branch1              : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_0_branch1              : (512, 2048, 7, 7)    => res5_0_branch1_bn           : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Sum)
+INFO net.py: 249: res5_0_branch1_bn           : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------|
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_0_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Relu)
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2a             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_1_branch2a             : (512, 512, 7, 7)     => res5_1_branch2a             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_1_branch2a             : (512, 512, 7, 7)     => res5_1_branch2a             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_1_branch2a             : (512, 512, 7, 7)     => res5_1_branch2b             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_1_branch2b             : (512, 512, 7, 7)     => res5_1_branch2b             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_1_branch2b             : (512, 512, 7, 7)     => res5_1_branch2b             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_1_branch2b             : (512, 512, 7, 7)     => res5_1_branch2c             : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_1_branch2c             : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Sum)
+INFO net.py: 249: res5_0_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------|
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_1_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: Relu)
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_2_branch2a             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_2_branch2a             : (512, 512, 7, 7)     => res5_2_branch2a             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_2_branch2a             : (512, 512, 7, 7)     => res5_2_branch2a             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_2_branch2a             : (512, 512, 7, 7)     => res5_2_branch2b             : (512, 512, 7, 7)     ------- (op: Conv)
+INFO net.py: 249: res5_2_branch2b             : (512, 512, 7, 7)     => res5_2_branch2b             : (512, 512, 7, 7)     ------- (op: AffineChannel)
+INFO net.py: 249: res5_2_branch2b             : (512, 512, 7, 7)     => res5_2_branch2b             : (512, 512, 7, 7)     ------- (op: Relu)
+INFO net.py: 249: res5_2_branch2b             : (512, 512, 7, 7)     => res5_2_branch2c             : (512, 2048, 7, 7)    ------- (op: Conv)
+INFO net.py: 249: res5_2_branch2c             : (512, 2048, 7, 7)    => res5_2_branch2c_bn          : (512, 2048, 7, 7)    ------- (op: AffineChannel)
+INFO net.py: 249: res5_2_branch2c_bn          : (512, 2048, 7, 7)    => res5_2_sum                  : (512, 2048, 7, 7)    ------- (op: Sum)
+INFO net.py: 249: res5_1_branch2c_bn          : (512, 2048, 7, 7)    => res5_2_sum                  : (512, 2048, 7, 7)    ------|
+INFO net.py: 249: res5_2_sum                  : (512, 2048, 7, 7)    => res5_2_sum                  : (512, 2048, 7, 7)    ------- (op: Relu)
+INFO net.py: 249: res5_2_sum                  : (512, 2048, 7, 7)    => res5_pool                   : (512, 2048, 1, 1)    ------- (op: AveragePool)
+INFO net.py: 249: res5_pool                   : (512, 2048, 1, 1)    => cls_score                   : (512, 9)             ------- (op: FC)
+INFO net.py: 249: res5_pool                   : (512, 2048, 1, 1)    => bbox_pred                   : (512, 36)            ------- (op: FC)
+INFO net.py: 249: cls_score                   : (512, 9)             => cls_prob                    : (512, 9)             ------- (op: SoftmaxWithLoss)
+INFO net.py: 249: labels_int32                : (512,)               => cls_prob                    : (512, 9)             ------|
+INFO net.py: 249: bbox_pred                   : (512, 36)            => loss_bbox                   : ()                   ------- (op: SmoothL1Loss)
+INFO net.py: 249: bbox_targets                : (512, 36)            => loss_bbox                   : ()                   ------|
+INFO net.py: 249: bbox_inside_weights         : (512, 36)            => loss_bbox                   : ()                   ------|
+INFO net.py: 249: bbox_outside_weights        : (512, 36)            => loss_bbox                   : ()                   ------|
+INFO net.py: 249: cls_prob                    : (512, 9)             => accuracy_cls                : ()                   ------- (op: Accuracy)
+INFO net.py: 249: labels_int32                : (512,)               => accuracy_cls                : ()                   ------|
+INFO net.py: 249: res4_5_sum                  : (2, 1024, 32, 63)    => da_grl                      : (2, 1024, 32, 63)    ------- (op: NegateGradient)
+INFO net.py: 249: da_grl                      : (2, 1024, 32, 63)    => da_conv_1                   : (2, 512, 34, 65)     ------- (op: Conv)
+INFO net.py: 249: da_conv_1                   : (2, 512, 34, 65)     => da_conv_1                   : (2, 512, 34, 65)     ------- (op: Relu)
+INFO net.py: 249: da_conv_1                   : (2, 512, 34, 65)     => da_conv_2                   : (2, 2, 36, 67)       ------- (op: Conv)
+INFO net.py: 249: da_conv_2                   : (2, 2, 36, 67)       => loss_da                     : ()                   ------- (op: SigmoidCrossEntropyLoss)
+INFO net.py: 249: da_label                    : (2, 2, 36, 67)       => loss_da                     : ()                   ------|
+INFO net.py: 249: res5_pool                   : (512, 2048, 1, 1)    => dc_grl                      : (512, 2048, 1, 1)    ------- (op: NegateGradient)
+INFO net.py: 249: dc_grl                      : (512, 2048, 1, 1)    => dc_ip1                      : (512, 1024)          ------- (op: FC)
+INFO net.py: 249: dc_ip1                      : (512, 1024)          => dc_relu_1                   : (512, 1024)          ------- (op: Relu)
+INFO net.py: 249: dc_relu_1                   : (512, 1024)          => da_drop_1                   : (512, 1024)          ------- (op: Dropout)
+INFO net.py: 249: da_drop_1                   : (512, 1024)          => dc_ip2                      : (512, 1024)          ------- (op: FC)
+INFO net.py: 249: dc_ip2                      : (512, 1024)          => dc_relu_2                   : (512, 1024)          ------- (op: Relu)
+INFO net.py: 249: dc_relu_2                   : (512, 1024)          => da_drop_2                   : (512, 1024)          ------- (op: Dropout)
+INFO net.py: 249: da_drop_2                   : (512, 1024)          => dc_ip3                      : (512, 1)             ------- (op: FC)
+INFO net.py: 249: dc_ip3                      : (512, 1)             => loss_dc                     : ()                   ------- (op: SigmoidCrossEntropyLoss)
+INFO net.py: 249: dc_label                    : (512,)               => loss_dc                     : ()                   ------|
+INFO net.py: 253: End of model: generalized_rcnn
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.005859, "eta": "9 days, 16:06:49", "iter": 0, "loss": 4.787521, "loss_bbox": 0.102187, "loss_cls": 2.565246, "loss_da": 0.070375, "loss_dc": 0.069571, "loss_rpn_bbox": 1.236359, "loss_rpn_cls": 0.743783, "lr": 0.001000, "mb_qsize": 64, "mem": 6366, "time": 11.937277}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.902344, "eta": "1 day, 9:14:55", "iter": 20, "loss": 1.949655, "loss_bbox": 0.082735, "loss_cls": 0.483958, "loss_da": 0.072139, "loss_dc": 0.069679, "loss_rpn_bbox": 0.717861, "loss_rpn_cls": 0.474994, "lr": 0.001000, "mb_qsize": 64, "mem": 6370, "time": 1.710418}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.887695, "eta": "23:50:45", "iter": 40, "loss": 1.603999, "loss_bbox": 0.102761, "loss_cls": 0.328687, "loss_da": 0.070938, "loss_dc": 0.069703, "loss_rpn_bbox": 0.625884, "loss_rpn_cls": 0.388854, "lr": 0.001000, "mb_qsize": 64, "mem": 6370, "time": 1.227072}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.895508, "eta": "23:29:32", "iter": 60, "loss": 1.636702, "loss_bbox": 0.144714, "loss_cls": 0.238839, "loss_da": 0.071016, "loss_dc": 0.069818, "loss_rpn_bbox": 0.611827, "loss_rpn_cls": 0.354434, "lr": 0.001000, "mb_qsize": 64, "mem": 6371, "time": 1.209219}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.877930, "eta": "23:04:54", "iter": 80, "loss": 1.588060, "loss_bbox": 0.218820, "loss_cls": 0.351290, "loss_da": 0.072124, "loss_dc": 0.069922, "loss_rpn_bbox": 0.531679, "loss_rpn_cls": 0.356512, "lr": 0.001000, "mb_qsize": 64, "mem": 6371, "time": 1.188416}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.876953, "eta": "23:11:15", "iter": 100, "loss": 1.588923, "loss_bbox": 0.211148, "loss_cls": 0.337213, "loss_da": 0.071147, "loss_dc": 0.069978, "loss_rpn_bbox": 0.528695, "loss_rpn_cls": 0.336659, "lr": 0.001000, "mb_qsize": 64, "mem": 6371, "time": 1.194218}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.889648, "eta": "23:08:00", "iter": 120, "loss": 1.579382, "loss_bbox": 0.225487, "loss_cls": 0.290025, "loss_da": 0.071647, "loss_dc": 0.070117, "loss_rpn_bbox": 0.548650, "loss_rpn_cls": 0.332012, "lr": 0.001000, "mb_qsize": 64, "mem": 6371, "time": 1.191771}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.898438, "eta": "22:57:52", "iter": 140, "loss": 1.443462, "loss_bbox": 0.267224, "loss_cls": 0.292507, "loss_da": 0.071031, "loss_dc": 0.069780, "loss_rpn_bbox": 0.505813, "loss_rpn_cls": 0.277462, "lr": 0.001000, "mb_qsize": 64, "mem": 6371, "time": 1.183403}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.861328, "eta": "22:46:29", "iter": 160, "loss": 1.550836, "loss_bbox": 0.348403, "loss_cls": 0.331385, "loss_da": 0.071621, "loss_dc": 0.069477, "loss_rpn_bbox": 0.438660, "loss_rpn_cls": 0.283821, "lr": 0.001000, "mb_qsize": 64, "mem": 6372, "time": 1.173955}
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.869141, "eta": "22:38:18", "iter": 180, "loss": 1.546761, "loss_bbox": 0.334874, "loss_cls": 0.313187, "loss_da": 0.072585, "loss_dc": 0.069906, "loss_rpn_bbox": 0.520174, "loss_rpn_cls": 0.265254, "lr": 0.001000, "mb_qsize": 64, "mem": 6372, "time": 1.167261}
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 126: Stopping enqueue thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 113: Stopping mini-batch loading thread
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO logging.py:  39: json_stats: {"accuracy_cls": 0.872070, "eta": "22:21:51", "iter": 200, "loss": 1.559418, "loss_bbox": 0.309566, "loss_cls": 0.343526, "loss_da": 0.071259, "loss_dc": 0.069691, "loss_rpn_bbox": 0.444955, "loss_rpn_cls": 0.263772, "lr": 0.001000, "mb_qsize": 64, "mem": 6372, "time": 1.153459}
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+WARNING workspace.py: 185: Original python traceback for operator `0` in network `generalized_rcnn` in exception above (most recent call last):
+WARNING workspace.py: 190:   File "tools/train_net.py", line 128, in <module>
+WARNING workspace.py: 190:   File "tools/train_net.py", line 110, in main
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/utils/train.py", line 53, in train_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/utils/train.py", line 132, in create_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 125, in create
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 90, in generalized_rcnn
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 246, in build_generic_detection_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/optimizer.py", line 40, in build_data_parallel_model
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/optimizer.py", line 63, in _build_forward_graph
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/model_builder.py", line 171, in _single_gpu_build_func
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/ResNet.py", line 36, in add_ResNet50_conv4_body
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/ResNet.py", line 99, in add_ResNet_convX_body
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/detectron/detectron/modeling/ResNet.py", line 252, in basic_bn_stem
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/cnn.py", line 97, in Conv
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/brew.py", line 107, in scope_wrapper
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/helpers/conv.py", line 186, in conv
+WARNING workspace.py: 190:   File "/scratch_net/biwidl103/haowang/anaconda2/lib/python2.7/site-packages/caffe2/python/helpers/conv.py", line 139, in _ConvBase
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...
+INFO loader.py: 287: SIGINT: Shutting down RoIDataLoader threads and exiting...

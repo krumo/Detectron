@@ -102,18 +102,16 @@ def get_fast_rcnn_blob_names(is_training=True):
                 for lvl in range(k_min, k_max + 1):
                     blob_names += ['keypoint_rois_fpn' + str(lvl)]
                 blob_names += ['keypoint_rois_idx_restore_int32']
-    # if is_training and cfg.TRAIN.DOMAIN_ADAPTATION:
-    #     blob_names += ['is_source']
-    #     blob_names += ['dc_label']
-    #     blob_names += ['da_label']
+    if is_training and cfg.TRAIN.DOMAIN_ADAPTATION:
+        blob_names+=['dc_label']
     return blob_names
 
 
-def add_fast_rcnn_blobs(blobs, im_scales, roidb):
+def add_fast_rcnn_blobs(blobs, im_scales, roidb, is_source):
     """Add blobs needed for training Fast R-CNN style models."""
     # Sample training RoIs from each image and append them to the blob lists
     for im_i, entry in enumerate(roidb):
-        frcn_blobs = _sample_rois(entry, im_scales[im_i], im_i)
+        frcn_blobs = _sample_rois(entry, im_scales[im_i], im_i, is_source[im_i])
         for k, v in frcn_blobs.items():
             blobs[k].append(v)
     # Concat the training blob lists into tensors
@@ -133,7 +131,7 @@ def add_fast_rcnn_blobs(blobs, im_scales, roidb):
     return valid
 
 
-def _sample_rois(roidb, im_scale, batch_idx):
+def _sample_rois(roidb, im_scale, batch_idx, is_source):
     """Generate a random sample of RoIs comprising foreground and background
     examples.
     """
@@ -194,16 +192,14 @@ def _sample_rois(roidb, im_scale, batch_idx):
         bbox_inside_weights=bbox_inside_weights,
         bbox_outside_weights=bbox_outside_weights
     )
-    # if cfg.TRAIN.DOMAIN_ADAPTATION and 'is_source' in roidb.keys():
-    #     print(roidb.keys())
-    #     if roidb['is_source']:
-    #         blob_dict['is_source']=np.full((1,),True,dtype=bool)
-    #         blob_dict['dc_label']= np.zeros((1,2,36,67), dtype=np.float32)
-    #         blob_dict['da_label']= np.zeros((256,), dtype=np.float32)
-    #     else:
-    #         blob_dict['is_source']=np.full((1,),False,dtype=bool)
-    #         blob_dict['dc_label']= np.ones((1,2,36,67), dtype=np.float32)
-    #         blob_dict['da_label']= np.ones((256,), dtype=np.float32)
+    print(blob_dict['labels_int32'].shape)
+    if cfg.TRAIN.DOMAIN_ADAPTATION:
+        if is_source:
+            blob_dict['dc_label'] = np.zeros(blob_dict['labels_int32'].shape, dtype=blob_dict['labels_int32'].dtype)
+        else:
+            blob_dict['dc_label'] = np.ones(blob_dict['labels_int32'].shape, dtype=blob_dict['labels_int32'].dtype)
+        print(blob_dict['dc_label'].shape)
+        print(batch_idx)
 
     # Optionally add Mask R-CNN blobs
     if cfg.MODEL.MASK_ON:

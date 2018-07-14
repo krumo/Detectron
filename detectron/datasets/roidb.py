@@ -41,7 +41,7 @@ def combined_roidb_for_training(dataset_names, proposal_files, is_source=True):
     def get_roidb(dataset_name, proposal_file, is_source):
         ds = JsonDataset(dataset_name)
         roidb = ds.get_roidb(
-            gt=True,
+            gt=is_source,
             proposal_file=proposal_file,
             crowd_filter_thresh=cfg.TRAIN.CROWD_FILTER_THRESH,
             is_source=is_source
@@ -64,13 +64,13 @@ def combined_roidb_for_training(dataset_names, proposal_files, is_source=True):
     roidb = roidbs[0]
     for r in roidbs[1:]:
         roidb.extend(r)
-    # if is_source:
-    roidb = filter_for_training(roidb)
+    if is_source:
+        roidb = filter_for_training(roidb)
 
     logger.info('Computing bounding-box regression targets...')
     add_bbox_regression_targets(roidb)
     logger.info('done')
-
+    print(roidb[0].keys())
     _compute_and_log_stats(roidb)
 
     return roidb
