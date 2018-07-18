@@ -58,7 +58,8 @@ def train_model():
     setup_model_for_training(model, weights_file, output_dir)
     training_stats = TrainingStats(model)
     CHECKPOINT_PERIOD = int(cfg.TRAIN.SNAPSHOT_ITERS / cfg.NUM_GPUS)
-
+    for param, grad in model.param_to_grad.items():
+        print(grad)
     for cur_iter in range(start_iter, cfg.SOLVER.MAX_ITER):
         training_stats.IterTic()
         lr = model.UpdateWorkspaceLr(cur_iter, lr_policy.get_lr_at_iter(cur_iter))

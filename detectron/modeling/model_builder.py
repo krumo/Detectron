@@ -233,7 +233,7 @@ def build_generic_detection_model(
             # Add Instance-level loss
             head_loss_gradients['instance'], _ = _add_instance_level_classifier(model, blob_feats_rois_all, dim_feats_rois_all)
             # Add consistency regularization
-            head_loss_gradients['consistency'] = _add_consistency_loss(model)
+            #head_loss_gradients['consistency'] = _add_consistency_loss(model)
 
         if model.train:
             loss_gradients = {}
@@ -248,17 +248,17 @@ def build_generic_detection_model(
     return model
 
 def _add_image_level_classifier(model, blob_in, dim_in, spatial_scale_in):
-    da_grl = model.NegateGradient(blob_in, 'da_grl')
-    # da_grl = blob_in
+    da_grl = model.net.NegateGradient(blob_in, 'da_grl')
+    model.StopGradient('da_grl', 'da_grl')
     da_conv_1 = model.Conv('da_grl', 'da_conv_1', dim_in, 512, 1, pad=1, stride=1)
     da_conv_1 = model.Relu(da_conv_1, 'da_conv_1')
     da_conv_2 = model.Conv(da_conv_1, 'da_conv_2', 512, 2, 1, pad=1, stride=1)
     
     loss_da = None
     if model.train:
-        loss_da = model.net.SigmoidCrossEntropyLoss(
-            [da_conv_2, 'da_label'], 'loss_da',
-            scale=0.1*model.GetLossScale()
+        softmax_da, loss_da = model.net.SpatialSoftmaxWithLoss(
+            [da_conv_2, 'da_label'], ['softmax_da', 'loss_da'],
+            scale=0.0*model.GetLossScale()
         )
         loss_da = blob_utils.get_loss_gradients(model, [loss_da])
         model.AddLosses(['loss_da'])
@@ -268,7 +268,7 @@ def _add_instance_level_classifier(model, blob_in, dim_in):
     from detectron.utils.c2 import const_fill
     from detectron.utils.c2 import gauss_fill
     dc_grl = model.net.NegateGradient(blob_in, 'dc_grl')
-    # dc_grl = blob_in
+    model.StopGradient('dc_grl', 'dc_grl')
     dc_ip1 = model.FC(dc_grl, 'dc_ip1', dim_in, 1024, weight_init=gauss_fill(0.01), bias_init=const_fill(0.0))
     da_relu_1 = model.Relu(dc_ip1, 'dc_relu_1')
     da_drop_1 = model.Dropout(da_relu_1, 'da_drop_1', ratio=0.5, is_test=0)
@@ -284,7 +284,7 @@ def _add_instance_level_classifier(model, blob_in, dim_in):
         dc_loss = model.net.SigmoidCrossEntropyLoss(
             [dc_ip3, 'dc_label'],
             'loss_dc',
-            scale=0.1*model.GetLossScale()
+            scale=0.0*model.GetLossScale()
         )
         dc_loss = blob_utils.get_loss_gradients(model, [dc_loss])
         model.AddLosses('loss_dc')
@@ -294,22 +294,30 @@ def _add_consistency_loss(model):
     def consistency_regularizer(inputs, outputs):
         da_conv = inputs[0].data
         dc_ip = inputs[1].data
-        is_source = inputs[2].data
         mean_da_conv = da_conv.reshape((da_conv.shape[0],-1)).mean(axis=1)
         import numpy as np
         repeated_da_conv = np.repeat(mean_da_conv,dc_ip.shape[0]//da_conv.shape[0])
-        loss = np.sum(np.absolute(repeated_da_conv-dc_ip))
+        loss = 1e-6*np.sum(np.absolute(repeated_da_conv-dc_ip))
         print(da_conv.shape)
         print(dc_ip.shape)
         print(loss)
         outputs[0].feed(np.array(loss))
+    def grad_consistency_regularizer(inputs, outputs):
+	grad_output = inputs[-1]
+	grad_input0 = outputs[0]
+	grad_input1 = outputs[1]
+	grad_input0.reshape(inputs[0].shape)
+	grad_input1.reshape(inputs[1].shape)
+	import numpy as np
+	grad_input0.data[...] = np.ones(inputs[0].shape)/(inputs[0].shape[2]*inputs[0].shape[3])
+	grad_input1.data[...] = np.ones(inputs[1].shape)
     loss_consistency = None
     if model.train:
         sigmoid_da_conv_2 = model.net.Sigmoid('da_conv_2', "sigmoid_da_conv_2")
         sigmoid_dc_ip3 = model.net.Sigmoid('dc_ip3', "sigmoid_dc_ip3")
-        # loss_consistency = model.net.Python(consistency_regularizer)(['sigmoid_da_conv_2', 'sigmoid_dc_ip3','is_source'],['loss_consistency'])
-        # loss_consistency = blob_utils.get_loss_gradients(model, [loss_consistency])
-        # model.AddLosses('loss_consistency')
+        loss_consistency = model.net.Python(consistency_regularizer, grad_consistency_regularizer)(['sigmoid_da_conv_2', 'sigmoid_dc_ip3'],['loss_consistency'])
+        loss_consistency = blob_utils.get_loss_gradients(model, [loss_consistency])
+        model.AddLosses('loss_consistency')
     
     return loss_consistency
 

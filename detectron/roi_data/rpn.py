@@ -37,6 +37,7 @@ def get_rpn_blob_names(is_training=True):
     """Blob names used by RPN."""
     # im_info: (height, width, image scale)
     blob_names = ['im_info']
+    blob_names += ['is_source']
     if is_training:
         # gt boxes: (batch_idx, x1, y1, x2, y2, cls)
         blob_names += ['roidb']
@@ -58,7 +59,7 @@ def get_rpn_blob_names(is_training=True):
                 'rpn_bbox_outside_weights_wide'
             ]
         if cfg.TRAIN.DOMAIN_ADAPTATION:
-            blob_names += ['is_source']
+            #blob_names += ['is_source']
             blob_names += ['da_label']
     return blob_names
 
@@ -107,9 +108,14 @@ def add_rpn_blobs(blobs, im_scales, roidb):
                     blobs[k + '_fpn' + str(lvl)].append(v)
         else:
             # Classical RPN, applied to a single feature level
-            rpn_blobs = _get_rpn_blobs(
-                im_height, im_width, [foa], all_anchors, gt_rois
-            )
+	    if cfg.TRAIN.DOMAIN_ADAPTATION:
+            	rpn_blobs = _get_rpn_blobs(
+                    im_height, im_width, [foa], all_anchors, gt_rois, entry['is_source']
+            	)
+	    else:
+		rpn_blobs = _get_rpn_blobs(
+                    im_height, im_width, [foa], all_anchors, gt_rois
+            	)
             for k, v in rpn_blobs.items():
                 blobs[k].append(v)
         
@@ -119,11 +125,13 @@ def add_rpn_blobs(blobs, im_scales, roidb):
             da_label= np.zeros((1,2,36,67), dtype=np.int32)
             if entry['is_source']:
                 blobs['is_source'].append(np.full((1,),True,dtype=np.bool_))
-                da_label[:,0,:,:] = 1
+                blobs['da_label'].append(np.zeros((1,36,67), dtype=np.int32))
             else:
                 blobs['is_source'].append(np.full((1,),False,dtype=np.bool_))
-                da_label[:,1,:,:] = 1
-            blobs['da_label'].append(da_label)
+                blobs['da_label'].append(np.ones((1,36,67), dtype=np.int32))
+            #blobs['da_label'].append(da_label)
+	else:
+	    blobs['is_source'].append(np.full((1,),True,dtype=np.bool_))
 
     for k, v in blobs.items():
         if isinstance(v, list) and len(v) > 0:
@@ -135,7 +143,9 @@ def add_rpn_blobs(blobs, im_scales, roidb):
     ]
 
     if cfg.TRAIN.DOMAIN_ADAPTATION:
-        valid_keys+=['is_source', 'dc_label', 'da_label']
+        valid_keys+=['is_source', 'da_label']
+    else:
+	valid_keys+=['is_source']
         # blobs['da_label']=np.zeros((1,2,36,67), dtype=np.int32)
         # if roidb[0]['is_source']:
         #     blobs['is_source']=np.full((1,),True,dtype=np.bool_)
@@ -157,7 +167,7 @@ def add_rpn_blobs(blobs, im_scales, roidb):
     return True
 
 
-def _get_rpn_blobs(im_height, im_width, foas, all_anchors, gt_boxes):
+def _get_rpn_blobs(im_height, im_width, foas, all_anchors, gt_boxes, is_source=True):
     total_anchors = all_anchors.shape[0]
     straddle_thresh = cfg.TRAIN.RPN_STRADDLE_THRESH
 
@@ -295,6 +305,9 @@ def _get_rpn_blobs(im_height, im_width, foas, all_anchors, gt_boxes):
         # bbox_outside_weights output with shape (1, 4 * A, height, width)
         _bbox_outside_weights = _bbox_outside_weights.reshape(
             (1, H, W, A * 4)).transpose(0, 3, 1, 2)
+	if not is_source:
+	    _labels = np.zeros(_labels.shape, dtype=np.int32)
+	    _bbox_targets = np.zeros(_bbox_targets.shape, dtype=np.float32)
         blobs_out.append(
             dict(
                 rpn_labels_int32_wide=_labels,

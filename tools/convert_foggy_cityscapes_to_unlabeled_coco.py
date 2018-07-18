@@ -94,7 +94,8 @@ def convert_foggy_cityscapes_instance_only(
             for filename in files:
                 if filename.endswith('.png'):
                     ann_name = filename.split('_leftImg8bit')[0]+'_gtFine_polygons.json'
-                    print('ann_name: '+ann_name)
+                    #print('ann_name: '+ann_name)
+
                     if len(images) % 50 == 0:
                         print("Processed %s images, %s annotations" % (
                             len(images), len(annotations)))
@@ -135,7 +136,7 @@ def convert_foggy_cityscapes_instance_only(
                     ann_id += 1
                     ann['image_id'] = image['id']
                     ann['segmentation'] = []
-                    ann['category_id'] = 0
+                    ann['category_id'] = 1
                     ann['iscrowd'] = 0
                     ann['area'] = json_ann['imgWidth']*json_ann['imgHeight']
                     ann['bbox'] = [0,0,json_ann['imgWidth'],json_ann['imgHeight']]

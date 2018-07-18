@@ -126,37 +126,85 @@ def add_single_scale_rpn_losses(model):
     """Add losses for a single scale RPN model (i.e., no FPN)."""
     # Spatially narrow the full-sized RPN label arrays to match the feature map
     # shape
-    model.net.SpatialNarrowAs(
-        ['rpn_labels_int32_wide', 'rpn_cls_logits'], 'rpn_labels_int32'
-    )
-    for key in ('targets', 'inside_weights', 'outside_weights'):
-        model.net.SpatialNarrowAs(
-            ['rpn_bbox_' + key + '_wide', 'rpn_bbox_pred'], 'rpn_bbox_' + key
+    def filtering(inputs, outputs):
+	import numpy as np
+	pred = inputs[0].data
+	is_source = inputs[1].data
+	pred0 = pred[0]
+	for i in range(is_source.shape[0]):
+	    if not is_source[i]:
+	        pred[i,:] = np.zeros(pred0.shape)
+	outputs[0].reshape(inputs[0].shape)
+	outputs[0].data[...] = pred.astype(float)
+
+    def grad_filtering(inputs, outputs):
+	grad_output = inputs[-1]
+	grad_input0 = outputs[0]
+	grad_input1 = outputs[1]
+	#grad_input2 = outputs[2]
+	grad_input0.reshape(grad_output.data.shape)
+	grad_input1.reshape(inputs[1].shape)
+	#grad_input2.reshape(inputs[2].shape)
+	import numpy as np
+	is_source = inputs[1].data
+	for i in range(is_source.shape[0]):
+	    if not is_source[i]:
+	        grad_output.data[i,:] = np.zeros(grad_output.data[0].shape)
+	grad_input0.data[...] = grad_output.data
+	grad_input1.data[...] = np.zeros(inputs[1].shape, dtype=np.int32)
+	#grad_input2.data[...] = np.zeros(inputs[2].shape)
+    if cfg.TRAIN.DOMAIN_ADAPTATION:
+    	model.net.Python(filtering, grad_filtering)(['rpn_cls_logits', 'is_source'],['filtered_rpn_cls_logits'])
+    	model.net.Python(filtering, grad_filtering)(['rpn_bbox_pred', 'is_source'],['filtered_rpn_bbox_pred'])
+    	model.net.SpatialNarrowAs(
+        	['rpn_labels_int32_wide', 'rpn_cls_logits'], 'rpn_labels_int32'
+    	)
+    	for key in ('targets', 'inside_weights', 'outside_weights'):
+        	model.net.SpatialNarrowAs(
+            	['rpn_bbox_' + key + '_wide', 'rpn_bbox_pred'], 'rpn_bbox_' + key
         )
-    loss_rpn_cls = model.net.SigmoidCrossEntropyLoss(
-        ['rpn_cls_logits', 'rpn_labels_int32'],
-        'loss_rpn_cls',
-        scale=model.GetLossScale()
-    )
-    loss_rpn_bbox = model.net.SmoothL1Loss(
-        [
-            'rpn_bbox_pred', 'rpn_bbox_targets', 'rpn_bbox_inside_weights',
-            'rpn_bbox_outside_weights'
-        ],
-        'loss_rpn_bbox',
-        beta=1. / 9.,
-        scale=model.GetLossScale()
-    )
-    # zero = model.net.ConstantFill([],'zero', value=0.0)
-    # from caffe2.python import core, dyndep
-    # dyndep.InitOpsLibrary()
-    # op1 = core.CreateOperator(
-    #         "Conditional", ['is_source', 'loss_rpn_bbox', 'zero'], "updated_loss_rpn_bbox")
-    # op2 = core.CreateOperator(
-    #         "Conditional", ['is_source', 'loss_rpn_cls', 'zero'], "updated_loss_rpn_cls")
-    # model.net.Proto().op.extend([op1, op2])
-    # updated_loss_rpn_bbox = model.net.Conditional(['is_source', 'loss_rpn_bbox', 'zero'],'updated_loss_rpn_bbox')
-    # updated_loss_rpn_cls = model.net.Conditional(['is_source', 'loss_rpn_cls', 'zero'],'updated_loss_rpn_cls')
+    	loss_rpn_cls = None
+    	loss_rpn_bbox = None
+    	loss_gradients = None
+    	loss_rpn_cls = model.net.SigmoidCrossEntropyLoss(
+        	['filtered_rpn_cls_logits', 'rpn_labels_int32'],
+        	'loss_rpn_cls',
+        	scale=model.GetLossScale()
+    	)
+    	loss_rpn_bbox = model.net.SmoothL1Loss(
+        	[
+            	'filtered_rpn_bbox_pred', 'rpn_bbox_targets', 'rpn_bbox_inside_weights',
+            	'rpn_bbox_outside_weights'
+        	],
+        	'loss_rpn_bbox',
+        	beta=1. / 9.,
+        	scale=model.GetLossScale()
+    	)
+    else:
+	model.net.SpatialNarrowAs(
+        	['rpn_labels_int32_wide', 'rpn_cls_logits'], 'rpn_labels_int32'
+    	)
+    	for key in ('targets', 'inside_weights', 'outside_weights'):
+        	model.net.SpatialNarrowAs(
+            	['rpn_bbox_' + key + '_wide', 'rpn_bbox_pred'], 'rpn_bbox_' + key
+        )
+    	loss_rpn_cls = None
+    	loss_rpn_bbox = None
+    	loss_gradients = None
+    	loss_rpn_cls = model.net.SigmoidCrossEntropyLoss(
+        	['rpn_cls_logits', 'rpn_labels_int32'],
+        	'loss_rpn_cls',
+        	scale=model.GetLossScale()
+    	)
+    	loss_rpn_bbox = model.net.SmoothL1Loss(
+        	[
+            	'rpn_bbox_pred', 'rpn_bbox_targets', 'rpn_bbox_inside_weights',
+            	'rpn_bbox_outside_weights'
+        	],
+        	'loss_rpn_bbox',
+        	beta=1. / 9.,
+        	scale=model.GetLossScale()
+    	)
     loss_gradients = blob_utils.get_loss_gradients(
         model, [loss_rpn_cls, loss_rpn_bbox]
     )

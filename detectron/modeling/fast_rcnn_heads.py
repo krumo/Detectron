@@ -74,18 +74,107 @@ def add_fast_rcnn_outputs(model, blob_in, dim):
 
 def add_fast_rcnn_losses(model):
     """Add losses for RoI classification and bounding box regression."""
-    cls_prob, loss_cls = model.net.SoftmaxWithLoss(
-        ['cls_score', 'labels_int32'], ['cls_prob', 'loss_cls'],
-        scale=model.GetLossScale()
-    )
-    loss_bbox = model.net.SmoothL1Loss(
-        [
-            'bbox_pred', 'bbox_targets', 'bbox_inside_weights',
-            'bbox_outside_weights'
-        ],
-        'loss_bbox',
-        scale=model.GetLossScale()
-    )
+    def filtering(inputs, outputs):
+	import numpy as np
+	pred = inputs[0].data
+	is_source = inputs[1].data
+	batch_size = pred.shape[0]//is_source.shape[0]
+	pred0 = pred[0]
+	for i in range(is_source.shape[0]):
+	    if not is_source[i]:
+	        pred[i*batch_size:(i+1)*batch_size,:] = np.zeros((batch_size, pred.shape[1]))
+	#print("reg")
+	#print(is_source)
+	#print(pred)
+	outputs[0].reshape(inputs[0].shape)
+	outputs[0].data[...] = pred.astype(float)
+
+    def grad_filtering(inputs, outputs):
+	grad_output = inputs[-1]
+	grad_input0 = outputs[0]
+	grad_input1 = outputs[1]
+	#grad_input2 = outputs[2]
+	grad_input0.reshape(grad_output.data.shape)
+	grad_input1.reshape(inputs[1].shape)
+	#grad_input2.reshape(inputs[2].shape)
+	import numpy as np
+	is_source = inputs[1].data
+	batch_size = grad_output.data.shape[0]//is_source.shape[0]
+	for i in range(is_source.shape[0]):
+	    if not is_source[i]:
+	        grad_output.data[i*batch_size:(i+1)*batch_size,:] = np.zeros((batch_size, grad_output.data.shape[1]))
+	grad_input0.data[...] = grad_output.data
+	grad_input1.data[...] = np.zeros(inputs[1].shape, dtype=np.int32)
+	#grad_input2.data[...] = np.zeros(inputs[2].shape)
+
+    def filtering_score(inputs, outputs):
+	import numpy as np
+	pred = inputs[0].data
+	is_source = inputs[1].data
+	batch_size = pred.shape[0]//is_source.shape[0]
+	pred0 = pred[0]
+	for i in range(is_source.shape[0]):
+	    if not is_source[i]:
+	        tmp = np.zeros((batch_size, pred.shape[1]))
+		tmp[:,0]=1
+		pred[i*batch_size:(i+1)*batch_size,:] = tmp
+	#print("cls")
+	#print(is_source)
+	#print(pred)
+	outputs[0].reshape(inputs[0].shape)
+	outputs[0].data[...] = pred.astype(float)
+
+    def grad_filtering_score(inputs, outputs):
+	grad_output = inputs[-1]
+	grad_input0 = outputs[0]
+	grad_input1 = outputs[1]
+	#grad_input2 = outputs[2]
+	grad_input0.reshape(grad_output.data.shape)
+	grad_input1.reshape(inputs[1].shape)
+	#grad_input2.reshape(inputs[2].shape)
+	import numpy as np
+	is_source = inputs[1].data
+	batch_size = grad_output.data.shape[0]//is_source.shape[0]
+	for i in range(is_source.shape[0]):
+	    if not is_source[i]:
+	        grad_output.data[i*batch_size:(i+1)*batch_size,:] = np.zeros((batch_size, grad_output.data.shape[1]))
+	grad_input0.data[...] = grad_output.data
+	grad_input1.data[...] = np.zeros(inputs[1].shape, dtype=np.int32)
+	#grad_input2.data[...] = np.zeros(inputs[2].shape)
+
+    #model.net.Python(filtering_score, grad_filtering_score)(['cls_score', 'is_source'],['filtered_cls_score'])
+    #cls_prob, loss_cls = model.net.SoftmaxWithLoss(
+    #    ['filtered_cls_score', 'labels_int32'], ['cls_prob', 'loss_cls'],
+    #    scale=model.GetLossScale()
+    #)
+    if cfg.TRAIN.DOMAIN_ADAPTATION:
+    	cls_prob = model.net.Softmax(["cls_score"], ["cls_prob"], engine='CUDNN')
+    	model.net.Python(filtering_score, grad_filtering_score)(['cls_prob', 'is_source'],['filtered_cls_prob'])
+    	xent = model.net.LabelCrossEntropy(['filtered_cls_prob','labels_int32'], 'xent')
+    	loss_cls = model.net.AveragedLoss(xent, "loss_cls")
+
+    	model.net.Python(filtering, grad_filtering)(['bbox_pred', 'is_source'],['filtered_bbox_pred'])
+    	loss_bbox = model.net.SmoothL1Loss(
+        	[
+            	'filtered_bbox_pred', 'bbox_targets', 'bbox_inside_weights',
+            	'bbox_outside_weights'
+        	],
+        	'loss_bbox',
+        	scale=model.GetLossScale()
+    	)
+    else:
+        cls_prob, loss_cls = model.net.SoftmaxWithLoss(
+        	['cls_score', 'labels_int32'], ['cls_prob', 'loss_cls'],
+        	scale=model.GetLossScale()
+    	)
+    	loss_bbox = model.net.SmoothL1Loss(
+        	[
+            	'bbox_pred', 'bbox_targets', 'bbox_inside_weights',
+            	'bbox_outside_weights'
+        	],
+        	'loss_bbox',
+        	scale=model.GetLossScale()
+    	)
     loss_gradients = blob_utils.get_loss_gradients(model, [loss_cls, loss_bbox])
     model.Accuracy(['cls_prob', 'labels_int32'], 'accuracy_cls')
     model.AddLosses(['loss_cls', 'loss_bbox'])

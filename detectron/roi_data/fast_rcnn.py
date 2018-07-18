@@ -192,14 +192,17 @@ def _sample_rois(roidb, im_scale, batch_idx, is_source):
         bbox_inside_weights=bbox_inside_weights,
         bbox_outside_weights=bbox_outside_weights
     )
-    print(blob_dict['labels_int32'].shape)
+    #print(blob_dict['labels_int32'].shape)
     if cfg.TRAIN.DOMAIN_ADAPTATION:
         if is_source:
             blob_dict['dc_label'] = np.zeros(blob_dict['labels_int32'].shape, dtype=blob_dict['labels_int32'].dtype)
         else:
             blob_dict['dc_label'] = np.ones(blob_dict['labels_int32'].shape, dtype=blob_dict['labels_int32'].dtype)
-        print(blob_dict['dc_label'].shape)
-        print(batch_idx)
+	    blob_dict['labels_int32'] = np.zeros(blob_dict['labels_int32'].shape, dtype=blob_dict['labels_int32'].dtype)
+	    blob_dict['bbox_targets'] = np.zeros(blob_dict['bbox_targets'].shape, dtype=blob_dict['bbox_targets'].dtype)
+	    #print(blob_dict['labels_int32'])
+        #print(blob_dict['dc_label'].shape)
+        #print(batch_idx)
 
     # Optionally add Mask R-CNN blobs
     if cfg.MODEL.MASK_ON:
